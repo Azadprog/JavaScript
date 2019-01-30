@@ -1,0 +1,359 @@
+﻿var VisitOslo;
+(function (VisitOslo) {
+    //console.log("VisitOslo: ", VisitOslo);
+    (function (Internet) {
+        var EventListPage = (function () {
+            
+            ko.bindingHandlers["booleanToCssClassConverter"] = {
+
+                update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+                    
+                    var cssClass = ko.utils.unwrapObservable(allBindings().booleanToCssClassConverterClass);
+
+                    var value = ko.utils.unwrapObservable(valueAccessor())();
+                    if (value === true) {
+                        $(element).addClass(cssClass);
+                    } else {
+                        $(element).removeClass(cssClass);
+                    }
+
+                },
+                init: function (element, valueAccessor, allBindingsAccessor) {
+                  
+                }
+            };
+
+            function EventListPage(tellusChannel, containerId, serviceUrl, pageId, pageIndex, pageSize, fromDate, toDate, language) {
+                console.log(arguments);
+                var self = this;
+                self.tellusChannel = tellusChannel;
+                self.containerId = '#' + containerId;
+                self.serviceUrl = serviceUrl;
+                self.pageSize = pageSize;
+                self.pageId = pageId;
+                self.fromDate = ko.observable(moment(fromDate, "YYYY-MM-DD").toDate());
+                self.toDate = ko.observable(moment(toDate, "YYYY-MM-DD").toDate());
+                self.days = ko.observableArray();
+                self.productsPaging = ko.observableArray();
+                self.productsCount = 0;
+                self.pageIndex = ko.observable(pageIndex);
+                self.customAeaIds = new Array();
+                self.facilityIds = new Array();
+                self.selectedMonthRange = ko.observable(null);
+                self.language = language;
+
+                var regionalSettings = $.datepicker.regional[self.language];
+                regionalSettings.firstDay = 1;
+                $.datepicker.setDefaults(regionalSettings);
+
+                self.fromDate.subscribe(function (newValue) {
+                    var df = newValue;
+                    if (df > self.toDate()) {
+                        self.toDate(df);
+                    }
+                        
+                });
+                self.toDate.subscribe(function (newValue) {
+                    var dt = newValue;
+                    if (dt < self.fromDate()) {
+                        self.fromDate(dt);
+                    }
+                });
+ 
+                self.changeDayVisible = function () {
+                    var from = typeof (self.fromDate()) === "string" ? new Date(self.fromDate()) : self.fromDate().toDateString();
+                    var to = typeof (self.toDate()) === "string" ? new Date(self.toDate()) : self.toDate().toDateString();
+                    return from === to;
+                };
+
+                var lang = self.language == "no" ? "nb" : self.language;
+                moment.lang(lang);
+
+                
+                self.filterCustomArea = function (areaId, item) {
+                    var id = areaId.trim();
+                    var currentConfiguration = new VisitOslo.Internet.EventListUrlHandler(window.location.hash);
+                    if (currentConfiguration.areas.indexOf(id) == -1) {
+                        currentConfiguration.AddArea(id);
+                        $(item).addClass("active");
+                    } else {
+                        currentConfiguration.RemoveArea(id);
+                        $(item).removeClass("active");
+                    }
+                  
+                    window.location.hash = currentConfiguration.GetHash();
+
+                };
+                self.filterFacility = function (areaId) {
+
+                    var currentConfiguration = new VisitOslo.Internet.EventListUrlHandler(window.location.hash);
+                    if (currentConfiguration.facilities.indexOf(areaId) == -1) {
+                        currentConfiguration.AddFacility(areaId);
+                    }
+                    else {
+                        currentConfiguration.RemoveFacility(areaId);
+                    }
+                    window.location.hash = currentConfiguration.GetHash();
+                };
+                self.changeMonth = function(dateSettings) {
+                    var dates = dateSettings.split(",");
+                    var currentConfiguration = new VisitOslo.Internet.EventListUrlHandler(window.location.hash);
+                    currentConfiguration.SetDateFrom(dates[0]);
+                    currentConfiguration.SetDateTo(dates[1]);
+                    self.selectedMonthRange(dateSettings);
+                    window.location.hash = currentConfiguration.GetHash();
+                };
+                self.changeDay = function (value) {
+
+                    var df11 = typeof (self.fromDate()) === "string" ? moment(self.fromDate(), "YYYY-MM-DD") :  moment(self.fromDate());
+                    var dt11 = typeof (self.toDate()) === "string" ? moment(self.toDate(), "YYYY-MM-DD") :   moment(self.toDate());
+
+                    var date = null;
+                    if(value > 0) {
+                        date = dt11.add("days", value);
+                    }
+                    else
+                    {
+                        date = df11.add("days", value);
+                    }
+
+                    var currentConfiguration = new VisitOslo.Internet.EventListUrlHandler(window.location.hash);
+                    currentConfiguration.SetDateFrom(date.format("YYYY-MM-DD"));
+                    currentConfiguration.SetDateTo(date.format("YYYY-MM-DD"));
+                  
+                    window.location.hash = currentConfiguration.GetHash();
+                    
+                    //self.loadProducts(self, self.pageIndex());
+                
+                };
+                self.customDateSearch = function () {
+                    $('div.cf-months').find('a.active').removeClass('active');
+                    self.selectedMonthRange(null);
+                    var df11 = typeof (self.fromDate()) === "string" ? self.fromDate() : moment(self.fromDate()).format("YYYY-MM-DD");
+                    var dt11 = typeof (self.toDate()) === "string" ? self.toDate() : moment(self.toDate()).format("YYYY-MM-DD");
+
+                    var currentConfiguration = new VisitOslo.Internet.EventListUrlHandler(window.location.hash);
+                    currentConfiguration.SetDateFrom(df11);
+                    currentConfiguration.SetDateTo(dt11);
+                    window.location.hash = currentConfiguration.GetHash();
+                    //this.loadProducts(self, self.pageIndex());
+                };
+                
+                var loaded = false;
+                Sammy(function () {
+                    console.log("runnig sammy");
+                    this.disable_push_state = true;
+
+                    this.get('#:path', function () {
+                        var filterConfiguration = new VisitOslo.Internet.EventListUrlHandler(this.params.path);
+                        self.loadProducts(self, filterConfiguration);
+                        loaded = true;
+                    });
+                }).run();
+                
+                if (!loaded) {
+                    console.log("not runnig sammy");
+                    var filterConfiguration = new VisitOslo.Internet.EventListUrlHandler(location.hash);
+                    self.loadProducts(self, filterConfiguration);
+                }
+                //this.loadProducts(self, self.pageIndex());
+            }
+            
+            EventListPage.prototype.loadProducts = function (self, filterConfiguration) {
+                console.log("runnig call: ", self.serviceUrl +
+                    '?PageId=' + self.pageId +
+                    '&PageIndex=' + 1 +
+                    '&PageSize=' + self.pageSize +
+                    "&CustomAreaIds=" + self.customAeaIds.join() +
+                    "&FacilityIds=" + self.facilityIds.join() +
+                    "&FromDate=" + df11 +
+                    "&ToDate=" + dt11 +
+                    "&Language=" + self.language);
+                self.applyConfiguration(self, filterConfiguration);
+
+                var df11 = typeof (self.fromDate()) === "string" ? self.fromDate() : moment(self.fromDate()).format("YYYY-MM-DD");
+                var dt11 = typeof (self.toDate()) === "string" ? self.toDate() : moment(self.toDate()).format("YYYY-MM-DD");
+                $('.other-filters').removeClass('show');
+                $('.btn-filters').removeClass('active');
+                $('.calendar-filter').removeClass('show');
+                $('.btn-calendar').removeClass('active');
+                $(".preloader-overlay").show();
+                
+                $.getJSON(self.serviceUrl +
+                    '?PageId=' + self.pageId +
+                    '&PageIndex=' + 1 +
+                    '&PageSize=' + self.pageSize +
+                    "&CustomAreaIds=" + self.customAeaIds.join() +
+                    "&FacilityIds=" + self.facilityIds.join() +
+                    "&FromDate=" + df11 +
+                    "&ToDate=" + dt11 +
+                    "&Language=" + self.language
+                )
+                    .done(function (data) {
+                        self.days.removeAll();
+                        $(".day-navigaton").hide();
+                        $(".preloader-overlay").hide();
+                        $.each(data.Days, function (newIndex, day) {
+                            self.days.push(transform(day));
+                            ko.utils.arrayMap(day.Products(), function (item) { return updateEvents(item, self.tellusChannel) });
+                        });
+                      
+                      if (self.changeDayVisible() === true) {
+                          $(".el-day-navigaton").show();
+                      } else {
+                          $(".el-day-navigaton").hide();
+                      }
+
+                  })
+                  .fail(function (jqXhr, textStatus, err) {
+                      console.log(err);
+                      $(".preloader-overlay").hide();
+                  });
+            };
+            
+            EventListPage.prototype.applyConfiguration = function (self, filterConfiguration) {
+
+                if (filterConfiguration.dateFrom != null) {
+                    self.fromDate(moment(filterConfiguration.dateFrom, "YYYY-MM-DD").toDate());
+                }
+                if (filterConfiguration.dateTo != null) {
+                    self.toDate(moment(filterConfiguration.dateTo, "YYYY-MM-DD").toDate());
+                }
+               
+                self.facilityIds = filterConfiguration.facilities;
+                self.customAeaIds = filterConfiguration.areas;
+                self.pageIndex(1);
+                self.applayFilterState(self, filterConfiguration);
+            },
+
+            EventListPage.prototype.applayFilterState = function (self, filterConfiguration) {
+
+                $(".lfd-category-box-facility").removeClass("active");
+                $(".lfd-category-box-area").removeClass("active");
+
+                if (filterConfiguration.facilities.length > 0) {
+                    $.each(filterConfiguration.facilities, function (index, value) {
+                        $("#chk-facility-" + value).addClass("active");
+                    });
+                }
+
+                if (filterConfiguration.areas.length > 0) {
+                    $.each(filterConfiguration.areas, function (index, value) {
+                        $("#chk-area-" + value).addClass("active");
+                    });
+                }
+            },
+
+            EventListPage.prototype.getDateInLanguage = function (date) {
+  
+                var date = new Date(parseInt(date.replace('/Date(', '').replace(')/', '')));
+
+                var formattedDate = moment(date).tz("Europe/Oslo").format("LLLL");
+                //var options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+                //var formattedDate = date.toLocaleString(self.language, options);
+                
+                return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+            };
+
+            EventListPage.prototype.formatQueryDate = function(date) {
+                return parseInt(date.replace('/Date(', '').replace(')/', ''));
+            }
+
+            EventListPage.prototype.getDateAsObject = function (date) {
+    
+                var momentDate = new Date(parseInt(date.replace('/Date(', '').replace(')/', '')));
+                var newDate = moment(momentDate).tz("Europe/Oslo");
+                var formattedDate = {}
+                formattedDate.dayOfMonth = newDate.format('D');
+                formattedDate.month = newDate.format('MMM').replace('.', '');
+                formattedDate.dayOfWeek = newDate.format('dddd')[0].toUpperCase() + newDate.format('dddd').slice(1);
+
+                if (self.EventListPage.isNorvegianOrGermanLang()) {
+                    formattedDate.dayOfMonth = newDate.format('D') + ".";
+                }
+                return formattedDate;
+            };
+
+
+            EventListPage.prototype.isNorvegianOrGermanLang = function () {
+                var lang = self.EventListPage.language.toLowerCase();
+                if (lang.indexOf("no") == 0) {
+                    return true;
+                }
+                if (lang.indexOf("de") == 0) {
+                    return true;
+                }
+                return false;
+
+            };
+
+            EventListPage.prototype.cropImages = function (element, index, data) {
+                navigation.imgEqualMargins($(element));
+            };
+
+            EventListPage.prototype.getStatusLabel = function(status) {
+                switch (status) {
+                    case 'Free':
+                        return window.statusLabels.Free;
+                    case 'TicketsAvailable':
+                        return window.statusLabels.TicketsAvailable;
+                    case 'SoldOut':
+                        return window.statusLabels.SoldOut;
+                    case 'Cancelled':
+                        return window.statusLabels.Cancelled;
+                    case 'OnlyBookingUrl':
+                        return window.statusLabels.OnlyBookingUrl;
+                    default:
+                        return window.statusLabels.NoInfo;
+                }
+               
+            };
+
+
+          
+            return EventListPage;
+        })();
+        Internet.EventListPage = EventListPage;
+    })(VisitOslo.Internet || (VisitOslo.Internet = {}));
+
+})(VisitOslo || (VisitOslo = {}));
+
+/// <summary>update CurrentScheduleDetails with ticket-informaion for each event</summary>
+function updateEvents(event, tellusChannel) {
+    var id = event.CurrentScheduleDetails.TicketInfo.ID
+    if (typeof id != "undefined" && id.length > 7) {
+        var TicketMasterWrapperUrl = "https://integrator.tellus.no/import/TIcketSystemWrapper2/?idlist=";
+        var requestUrl = TicketMasterWrapperUrl + id + "&channel=" + tellusChannel;
+        var promise = $.ajax({
+            url: requestUrl,
+            success: function (jsonData) {
+                var data = JSON.parse(jsonData);
+                event.CurrentScheduleDetails.TicketInfo.BookingUrl(data.events[0].bookingurl);
+                event.CurrentScheduleDetails.TicketInfo.Status(getStatus(data.events[0], event.CurrentScheduleDetails.TicketInfo.Status())); 
+            }
+        });
+        return promise;
+    }
+};
+
+function getStatus(data, oldStatus){
+    if (data.seats_avail && data.seats_avail == "True")
+        return "TicketsAvailable";
+    if (data.canceled && data.canceled == "True")
+        return "Cancelled";
+    if (data.sold_out && data.sold_out == "True")
+        return "SoldOut";
+    if (typeof oldStatus != "undefined")
+        return oldStatus;
+    return "InfoNotAvailable";
+};
+
+/// <summary>create knockout objects for Status and BookingUrl</summary>
+function transform(day) {
+    day.Products = ko.observableArray(day.Products.map(function (product) {
+        product.CurrentScheduleDetails.TicketInfo.Status = ko.observable(product.CurrentScheduleDetails.TicketInfo.Status);
+        product.CurrentScheduleDetails.TicketInfo.BookingUrl = ko.observable(product.CurrentScheduleDetails.TicketInfo.BookingUrl);
+        return product;
+    }));
+    return day;
+}

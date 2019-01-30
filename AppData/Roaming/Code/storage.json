@@ -1,0 +1,33 @@
+{
+    "telemetry.machineId": "7bbc319b019b1984590a1e02a4ca6634bcd8e55442b8beecd6f8961eec014f28",
+    "theme": "vs-dark",
+    "themeBackground": "#1e1e1e",
+    "windowsState": {
+        "openedWindows": [],
+        "lastActiveWindow": {
+            "folderUri": {
+                "$mid": 1,
+                "fsPath": "c:\\Users\\AzadKillaz94\\Desktop\\Ovingsoppgave_fontstorrelse",
+                "external": "file:///c%3A/Users/AzadKillaz94/Desktop/Ovingsoppgave_fontstorrelse",
+                "path": "/c:/Users/AzadKillaz94/Desktop/Ovingsoppgave_fontstorrelse",
+                "scheme": "file"
+            },
+            "backupPath": "C:\\Users\\AzadKillaz94\\AppData\\Roaming\\Code\\Backups\\c720da288c4ad7e9516f6659e44483d8",
+            "uiState": {
+                "mode": 0,
+                "x": -8,
+                "y": -8,
+                "width": 1936,
+                "height": 1056
+            }
+        }
+    },
+    "pickerWorkingDir": "C:\\Users\\AzadKillaz94\\Desktop",
+    "openedPathsList": {
+        "workspaces2": [
+            "file:///c%3A/Users/AzadKillaz94/Desktop/Ovingsoppgave_fontstorrelse",
+            "file:///c%3A/Users/AzadKillaz94/Desktop/my_project%20js"
+        ],
+        "files2": []
+    }
+}

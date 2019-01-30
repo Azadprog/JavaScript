@@ -1,0 +1,28 @@
+[2019-01-28 19:34:05.088] [exthost] [info] extension host started
+[2019-01-28 19:34:05.098] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch {"startup":true,"activationEvent":"*"}
+[2019-01-28 19:34:05.098] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\debug-auto-launch\dist\extension
+[2019-01-28 19:34:05.101] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet {"startup":true,"activationEvent":"*"}
+[2019-01-28 19:34:05.101] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\emmet\dist\extension
+[2019-01-28 19:34:05.105] [exthost] [info] ExtensionService#_doActivateExtension vscode.git {"startup":true,"activationEvent":"*"}
+[2019-01-28 19:34:05.105] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\main
+[2019-01-28 19:34:05.121] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict {"startup":true,"activationEvent":"*"}
+[2019-01-28 19:34:05.121] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\merge-conflict\dist\extension
+[2019-01-28 19:34:05.123] [exthost] [info] ExtensionService#_doActivateExtension vscode.typescript-language-features {"startup":false,"activationEvent":"onLanguage:javascript"}
+[2019-01-28 19:34:05.123] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\typescript-language-features\dist\extension
+[2019-01-28 19:34:05.138] [exthost] [info] eager extensions activated
+[2019-01-28 19:34:25.915] [exthost] [info] extension host started
+[2019-01-28 19:34:25.925] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch {"startup":true,"activationEvent":"*"}
+[2019-01-28 19:34:25.925] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\debug-auto-launch\dist\extension
+[2019-01-28 19:34:25.927] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet {"startup":true,"activationEvent":"*"}
+[2019-01-28 19:34:25.927] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\emmet\dist\extension
+[2019-01-28 19:34:25.931] [exthost] [info] ExtensionService#_doActivateExtension vscode.git {"startup":true,"activationEvent":"*"}
+[2019-01-28 19:34:25.931] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\main
+[2019-01-28 19:34:25.945] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict {"startup":true,"activationEvent":"*"}
+[2019-01-28 19:34:25.945] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\merge-conflict\dist\extension
+[2019-01-28 19:34:25.947] [exthost] [info] eager extensions activated
+[2019-01-28 19:34:27.488] [exthost] [info] ExtensionService#_doActivateExtension vscode.html-language-features {"startup":false,"activationEvent":"onLanguage:html"}
+[2019-01-28 19:34:27.488] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\html-language-features\client\dist\htmlMain
+[2019-01-28 19:34:31.760] [exthost] [info] ExtensionService#_doActivateExtension vscode.typescript-language-features {"startup":false,"activationEvent":"onLanguage:javascript"}
+[2019-01-28 19:34:31.760] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\typescript-language-features\dist\extension
+[2019-01-28 19:43:41.454] [exthost] [info] ExtensionService#_doActivateExtension vscode.extension-editing {"startup":false,"activationEvent":"onLanguage:typescript"}
+[2019-01-28 19:43:41.454] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\extension-editing\dist\extension

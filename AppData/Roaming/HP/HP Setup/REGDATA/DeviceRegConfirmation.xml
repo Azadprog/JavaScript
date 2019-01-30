@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:ProductRegistrationsResponse xmlns:ns0="http://isac.hp.com/Schemas/ProductRegistraions/CDORS.xsd">
+    <ns0:Response>
+        <ns0:Reference_Number>P|B|25802796</ns0:Reference_Number>
+        <ns0:StatusCode>200</ns0:StatusCode>
+        <ns0:Message/>
+    </ns0:Response>
+</ns0:ProductRegistrationsResponse>

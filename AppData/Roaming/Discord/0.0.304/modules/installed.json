@@ -1,0 +1,41 @@
+{
+  "discord_desktop_core": {
+    "installedVersion": 2
+  },
+  "discord_erlpack": {
+    "installedVersion": 1
+  },
+  "discord_spellcheck": {
+    "installedVersion": 1
+  },
+  "discord_utils": {
+    "installedVersion": 2
+  },
+  "discord_voice": {
+    "installedVersion": 2
+  },
+  "discord_game_utils": {
+    "installedVersion": 2
+  },
+  "discord_cloudsync": {
+    "installedVersion": 1
+  },
+  "discord_rpc": {
+    "installedVersion": 1
+  },
+  "discord_overlay2": {
+    "installedVersion": 1
+  },
+  "discord_dispatch": {
+    "installedVersion": 2
+  },
+  "discord_modules": {
+    "installedVersion": 1
+  },
+  "discord_contact_import": {
+    "installedVersion": 1
+  },
+  "discord_vigilante": {
+    "installedVersion": 1
+  }
+}

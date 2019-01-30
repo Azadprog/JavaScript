@@ -1,0 +1,32 @@
+2019/01/30-12:05:57.000 40c4 Reusing MANIFEST C:\Users\AzadKillaz94\AppData\Local\Google\Chrome\User Data\Default\Local Extension Settings\cfhdojbkjhnklbpkdaibdccddilifddb/MANIFEST-000001
+2019/01/30-12:05:57.001 40c4 Recovering log #458
+2019/01/30-12:05:57.002 40c4 Reusing old log C:\Users\AzadKillaz94\AppData\Local\Google\Chrome\User Data\Default\Local Extension Settings\cfhdojbkjhnklbpkdaibdccddilifddb/000458.log 
+2019/01/30-12:06:58.018 4dec Level-0 table #462: started
+2019/01/30-12:06:58.073 4dec Level-0 table #462: 3829027 bytes OK
+2019/01/30-12:06:58.077 4dec Delete type=0 #458
+2019/01/30-12:09:18.845 4dec Level-0 table #464: started
+2019/01/30-12:09:18.914 4dec Level-0 table #464: 3828038 bytes OK
+2019/01/30-12:09:18.918 4dec Delete type=0 #461
+2019/01/30-13:06:57.702 4dec Level-0 table #466: started
+2019/01/30-13:06:57.739 4dec Level-0 table #466: 3828597 bytes OK
+2019/01/30-13:06:57.741 4dec Delete type=0 #463
+2019/01/30-13:06:57.742 4dec Compacting 4@0 + 2@1 files
+2019/01/30-13:06:57.797 4dec Generated table #467@0: 1 keys, 3827769 bytes
+2019/01/30-13:06:57.801 4dec Generated table #468@0: 3 keys, 401 bytes
+2019/01/30-13:06:57.801 4dec Compacted 4@0 + 2@1 files => 3828170 bytes
+2019/01/30-13:06:57.802 4dec compacted to: files[ 0 2 1 0 0 0 0 ]
+2019/01/30-13:06:57.803 4dec Delete type=2 #456
+2019/01/30-13:06:57.803 4dec Delete type=2 #457
+2019/01/30-13:06:57.804 4dec Delete type=2 #459
+2019/01/30-13:06:57.804 4dec Delete type=2 #462
+2019/01/30-13:06:57.805 4dec Delete type=2 #464
+2019/01/30-13:06:57.805 4dec Delete type=2 #466
+2019/01/30-13:16:06.165 4dec Level-0 table #470: started
+2019/01/30-13:16:06.200 4dec Level-0 table #470: 3828101 bytes OK
+2019/01/30-13:16:06.203 4dec Delete type=0 #465
+2019/01/30-14:06:58.717 4dec Level-0 table #472: started
+2019/01/30-14:06:58.796 4dec Level-0 table #472: 3827908 bytes OK
+2019/01/30-14:06:58.800 4dec Delete type=0 #469
+2019/01/30-14:11:34.317 4dec Level-0 table #474: started
+2019/01/30-14:11:34.370 4dec Level-0 table #474: 3828046 bytes OK
+2019/01/30-14:11:34.373 4dec Delete type=0 #471

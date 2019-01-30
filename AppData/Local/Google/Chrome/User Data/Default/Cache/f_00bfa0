@@ -1,0 +1,751 @@
+﻿ko.observableArray.fn.pushAll = function (valuesToPush) {
+    var underlyingArray = this();
+    this.valueWillMutate();
+    ko.utils.arrayPushAll(underlyingArray, valuesToPush);
+    this.valueHasMutated();
+    return this;
+};
+
+var VisitOslo;
+(function (VisitOslo) {
+    (function (Internet) {
+        var ProductPresentationPage = (function () {
+            var self;
+            //Object initialization
+            function ProductPresentationPage(tellusChannel, containerId, serviceUrl, relatedProductsServiceUrl, companyEventsServiceUrl, companyEventsGroupedByMonthServiceUrl, pageId, productId, language, googleMapApiKey, zoomLevel, cityCenterLat, cityCenterLong, markerIcon, userMarkerIcon, distanceLabel) {
+                self = this;
+                self.tellusChannel = tellusChannel;
+                self.compnyItemStartNumber = 5;
+                self.compnyItemCurrentNumber = ko.observable(self.compnyItemStartNumber);
+                self.serviceUrl = serviceUrl;
+                self.relatedProductsServiceUrl = relatedProductsServiceUrl;
+                self.companyEventsServiceUrl = companyEventsServiceUrl;
+                self.companyEventsGroupedByMonthServiceUrl = companyEventsGroupedByMonthServiceUrl;
+                self.containerId = '#' + containerId;
+                self.productId = productId;
+                self.pageId = pageId;
+                self.product = ko.observable();
+                self.distance = ko.observable();
+                self.images = ko.observableArray();
+                self.files = ko.observableArray();
+                self.relatedProducts = ko.observableArray();
+                self.companyProducts = ko.observableArray();
+                self.companyProductsGroupedByMonth = ko.observableArray();
+                self.companyPorductsToShow = 10;
+                self.showCompanyTab = ko.observable(false);
+                self.language = language;
+                self.googleMapApiKey = googleMapApiKey;
+                self.zoomLevel = zoomLevel;
+                self.cityCenterLat = cityCenterLat;
+                self.cityCenterLong = cityCenterLong;
+                self.mapActivated = false;
+                self.showSchedule = ko.observable();
+                self.markerIcon = markerIcon;
+                self.userMarkerIcon = userMarkerIcon;
+                self.movies = ko.observableArray();
+                self.enableContact = ko.observable();
+                self.mapRoads = ko.observableArray();
+                self.CustomerId = null;
+                self.userLatitude = ko.observable(null);
+                self.userLongitude = ko.observable(null);
+                self.distanceLabel = distanceLabel;
+
+                self.showShortActiveSchedulesListLimit = 3;
+                self.showShortActiveSchedulesList = ko.observable(false);
+
+                self.prodcuctActiveSchedulesList = ko.computed(function () {
+                    if (!self.product()) {
+                        return {};
+                    }
+
+                    if (self.showShortActiveSchedulesList() == false) {
+                        return self.product().ActiveSchedules;
+                    }
+
+                    return self.product().ActiveSchedules.slice(0, self.showShortActiveSchedulesListLimit);
+                });
+
+                self.ShowAllActiveSchedules = function () {
+                    self.showShortActiveSchedulesList(false);
+                }
+
+
+                $(self.containerId).on('click', '.map-tab', function () {
+                    self.activateMap(self);
+                });
+
+
+                self.showCompanyTab.subscribe(function (val) {
+                    if (val == true && $(window).width() < 767) {
+                        $('.upcomming-events').parent().css("display", "block");
+                    }
+                }, self);
+
+
+                self.currentCompanyProducts = ko.computed(function () {
+
+                    if (self.companyProducts().length > self.compnyItemCurrentNumber()) {
+                        return self.companyProducts().slice(0, self.compnyItemCurrentNumber());
+                    }
+                    return self.companyProducts();
+                });
+
+
+                self.IsShowMoreVisible = ko.computed(function () {
+
+                    if (self.currentCompanyProducts().length < self.companyProducts().length) {
+                        return true;
+                    }
+                    return false;
+                });
+
+
+                self.IncrementProductNumber = function () {
+                    self.compnyItemCurrentNumber(self.compnyItemCurrentNumber() + self.compnyItemStartNumber);
+                };
+
+
+                var lang = self.language == "no" ? "nb" : self.language;
+                moment.lang(lang);
+
+                self.loadProduct(self);
+            }
+
+
+
+            ProductPresentationPage.prototype.loadProduct = function (self) {
+
+                $.getJSON(self.serviceUrl + '?ProductId=' + self.productId + '&PageId=' + self.pageId + '&Language=' + self.language)
+                    .done(function (data) {                     
+                        self.images.pushAll(data.Images);
+                        self.files.pushAll(data.Files);
+                        self.mapRoads.pushAll(data.GpxFiles);
+
+                        if (data.Movies != null) {
+                            self.movies.pushAll(data.Movies);
+                        }
+
+                        if (data.ExternalSystemList.length > 0) {
+                            var source = data.ExternalSystemList;
+                            for (var i = 0; i < source.length; i++) {
+                                if (source[i].Type === 9) {
+                                    data.TripAdvisorData = source[i];
+                                } else if (source[i].Name === "bookatable") {
+                                    data.ShowBookaTableWidget = true;
+                                }
+                            }
+
+                        }
+                        self.showShortActiveSchedulesList(data.ActiveSchedules.length > self.showShortActiveSchedulesListLimit);
+
+                        data.ContactItems[0].ShortWebSiteName = String(data.ContactItems[0].WebSiteName).replace(/^www\./, '');
+
+                        self.product(data);
+
+                        if (data.CustomerId != null && data.ProductType != 3) {
+                            self.loadCompanyEventsGroupedByMonth(self);
+                            //test
+                            //self.loadCompanyEvents(self);
+
+                        }
+
+                        document.title = self.product().Name;
+                        if (self.product().RelatedProductIds.length != 0) {
+                            self.loadRelatedProducts(self);
+                        }
+
+                        self.enableContact(self.product().ProductType != 1 && (self.product().Address != null || self.product().ContactItems != null || self.product().AdvertList != null));
+                        if (self.product().ContactItems.length == 1) {
+                            if (self.product().ContactItems[0].EmailField == null &&
+                                self.product().ContactItems[0].FaxField == null &&
+                                self.product().ContactItems[0].TelephoneField == null &&
+                                self.product().ContactItems[0].WebSite == null &&
+                                self.product().Address == null &&
+                                (self.product().AdvertList == null || self.product().AdvertList.length == 0)) {
+                                self.enableContact(false);
+                            }
+                            
+                        }
+                        
+                        self.showSchedule(self.product().ActiveSchedules.length != 0 && self.product().ProductType != 1);
+
+                        if (self.product().ActiveSchedules.length == 1 &&
+                            self.product().ActiveSchedules[0].DateFrom == null &&
+                            self.product().ActiveSchedules[0].DateTo == null &&
+                            self.product().ActiveSchedules[0].FromTime == null &&
+                            self.product().ActiveSchedules[0].Location == "") {
+                            self.showSchedule(false);
+                        }
+
+                        //Loading tabs after product was set
+
+                        $('.responsive-tabs').easyResponsiveTabs();
+                        //To initialize map it tab is open
+                        if ($(self.containerId).find('.resp-tab-active .map-tab').length != 0) {
+                            //map tab is open
+                            self.activateMap(self);
+                        }
+
+                        if ($('#product-page').find(".twitter-share-button").length > 0 && typeof twttr != 'undefined') {
+                            twttr.widgets.load();
+                        }
+                        if ($('#product-page').find(".fb-like").length > 0 && typeof FB != 'undefined') {
+                            FB.XFBML.parse();
+                        }
+                        if (typeof stButtons != 'undefined') { stButtons.locateElements(); }
+
+                        if (self.showCompanyTab() == false) {
+
+                            $('.upcomming-events').parent().css("display", "none");
+                        }
+
+                        bindClickToRatingTripAdvisorWidgetHolder();
+
+                        setTripAdvistorIframesHeight();
+
+                    })
+                    .fail(function (jqXhr, textStatus, err) {
+                        console.log(err);
+                    });
+
+            };
+
+            function setTripAdvistorIframesHeight() {
+                var detailTripAdvisorWidgetWidth = $('.detailTripAdvisorWidget').width();
+                $(window).resize(function () {
+                    var currentDetailTripAdvisorWidgetWidth = $('.detailTripAdvisorWidget').width();
+                    if (currentDetailTripAdvisorWidgetWidth != detailTripAdvisorWidgetWidth) {
+                        $('.detailTripAdvisorWidget').attr("src", $('.detailTripAdvisorWidget').attr("src"));
+                        detailTripAdvisorWidgetWidth = currentDetailTripAdvisorWidgetWidth;
+                    }
+                });
+
+                $(window).on('message', function (e) {
+                    var msg = e.originalEvent;
+                    var domainRegex = '(https*:\\/\\/.*\\.tripadvisor\\.*)';
+                    var pattern = new RegExp(domainRegex, ["i"]);
+                    var match = pattern.exec(msg.origin);
+
+                    if (match != null && typeof msg.data == 'string' && msg.data.substring(0, 7) == "height=") {
+                        var height = msg.data.substring(7, 100);
+                        $(".detailTripAdvisorWidget").height(height + "px");
+                    }
+                });
+            }
+
+            function bindClickToRatingTripAdvisorWidgetHolder() {
+                $('#ratingTripAdvisorWidgetHolder').on('click', function (e) {
+                    e.preventDefault();
+                    $('#tripadvisor-tab-link').click();
+                });
+
+                $('#tripadvisor-tab-link').on('click', function () {
+                    $(window).resize();
+                });
+            }
+
+            ProductPresentationPage.prototype.loadCompanyEvents = function (self) {
+
+                $.getJSON(self.companyEventsServiceUrl +
+                    '?PageId=' + self.pageId +
+                    '&CompanyId=' + self.product().CustomerId +
+                    '&ProductId=' + self.productId +
+                    '&Language=' + self.language)
+                  .done(function (data) {
+                      $.each(data, function (newIndex, newValue) {
+
+                          var productOject = new ProductModel(newValue);
+                          self.companyProducts.push(productOject);
+
+                      });
+                      if (self.companyProducts().length > 0 && self.product().ProductType != 3) {
+                          self.showCompanyTab(true);
+                      }
+
+                  })
+                  .fail(function (jqXhr, textStatus, err) {
+                      //Something goes wrong so we will hide controll
+                      $(self.containerId).hide();
+
+                  });
+
+            };
+
+            ProductPresentationPage.prototype.loadCompanyEventsGroupedByMonth = function (self) {
+                $.getJSON(self.companyEventsGroupedByMonthServiceUrl +
+                    '?PageId=' + self.pageId +
+                    '&CompanyId=' + self.product().CustomerId +
+                    '&ProductId=' + self.productId +
+                    '&Language=' + self.language +
+                    '&DbOwnerId=' + self.product().DbOwnerId)
+                  .done(function (data) {
+                      var monthsArray = [];
+                      $.each(data.Months, function (newIndex, newValue) {
+                          var monthObject = new MonthModel(newValue);
+                          transform(monthObject.month);
+                          monthsArray.push(monthObject);
+                          ko.utils.arrayMap(monthObject.month.Products(), function (item) { return updateEvents(item, self.tellusChannel) });
+                      });
+
+                      self.resolvEvntsToShowOnStart(monthsArray, self.companyPorductsToShow);
+
+                      $.each(monthsArray, function (idx, monthObject) {
+                          self.companyProductsGroupedByMonth.push(monthObject);
+                      });
+
+                      if (self.companyProductsGroupedByMonth().length > 0 && self.product().ProductType != 3) {
+                          self.showCompanyTab(true);
+                      }
+
+                      var tabHeader = $(".tm-tab-header:not(':first')");
+                      tabHeader.each(function () {
+                          $(this).on('click', function () {
+                              $(this).toggleClass('active');
+                              $(this).parent().nextAll().each(function () {
+                                  $(this).toggleClass('hidden');
+                                  if ($(this).hasClass('tab-header-wrapper')) {
+                                      return false;
+                                  }
+                                  return true;
+                              });
+                          });
+                      });
+
+                  })
+                  .fail(function (jqXhr, textStatus, err) {
+                      //Something goes wrong so we will hide controll
+                      $(self.containerId).hide();
+
+                  });
+
+            };
+
+            ProductPresentationPage.prototype.resolvEvntsToShowOnStart = function (monthsArray, companyPorductsToShow) {
+                var productsWithModel = $.map(monthsArray, function (m) {
+                    return $.map(m.month.Products, function (p) {
+                        return { Model: m, Product: p }
+                    });
+                });
+
+                var eventsToShow = productsWithModel.splice(0, companyPorductsToShow);
+
+                var items = {}
+                $.each(eventsToShow, function (index, val) {
+                    var key = val.Model.date;
+                    if (!items[key]) {
+                        items[key] = { Model: val.Model, Count: 0 }
+                    }
+                    items[key].Count += 1;
+                });
+
+                $.each(items, function (idx, val) {
+                    val.Model.listElementNumber(val.Count);
+                    val.Model.ShowOnStart(true);
+                    val.Model.init();
+                });
+            }
+
+            ProductPresentationPage.prototype.getMonthAndYearInLanguage = function (self, date) {
+                var newDate = moment(date);
+                var stringDate = newDate.format('MMMM YYYY');
+                return stringDate[0].toUpperCase() + stringDate.slice(1);
+            };
+
+            ProductPresentationPage.prototype.loadRelatedProducts = function (self) {
+                var relatedProducts = null;
+                $.each(self.product().RelatedProductIds, function (newIndex, newValue) {
+                    if (relatedProducts == null) {
+                        relatedProducts = newValue;
+                    } else {
+                        relatedProducts = relatedProducts + ',' + newValue;
+                    }
+                });
+
+                $.getJSON(self.relatedProductsServiceUrl + '?PageId=' + self.pageId + '&ProductsIds=' + relatedProducts + '&Language=' + self.language)
+                  .done(function (data) {
+                      $.each(data.Products, function (newIndex, newValue) {
+                          self.relatedProducts.push(newValue);
+                      });
+                      //$(self.containerId).show();
+                  })
+                  .fail(function (jqXhr, textStatus, err) {
+                      //Something goes wrong so we will hide controll
+                      $(self.containerId).hide();
+
+                  });
+            };
+            ProductPresentationPage.prototype.AddValues = function (a, b) {
+                return a + b;
+            };
+            ProductPresentationPage.prototype.startSlider = function () {
+                $('.slider-product').visitOsloSlider({
+                    type: 'product',
+                    mode: 'fade',
+                    captions: true,
+                    slideWidth: 700,
+                    pagerCustom: '.pager-container',
+                    video: true,
+                    pause: 5000,
+                    auto: (function () {
+                        var bool = ($('.slider-product .slide').length > 1);
+                        return bool;
+                    })(),
+                    touchEnabled: (function () {
+                        return $('.slider-product .slide').length > 1 ? true : false;
+                    })(),
+                    onSliderLoad: (function () {
+                        var slides = $('.slider-product .slide');
+
+                        slides.each(function () {
+                            $(this).find('.slide-image-container div').each(function () {
+                              //  console.log($(this).width() + ' ' + $(this).parent().parent().width())
+                                if ($(this).width() > $(this).parent().parent().width()) {
+                                    $(this).css('width', $(this).parent().parent().width() + 'px');
+                                }
+                            });
+                        });
+
+                        //console.log('calc height of slider');
+                        //console.log($('.slider-product').height());
+
+                        /*
+                        var documentWidth = $(document).width();
+                        if (documentWidth > 768) {                        
+                           return;
+                        }
+                        var ratio = documentWidth / 800;                //ratio for standard tellus image 800x533 - sorry!
+                        var height = 533 * ratio;
+                        slides.each(function() {
+                            $(this).find('img').css('height', height + 'px');
+                        });
+                        */
+                        //$('.slide-container').css('height', height + 'px');
+                    })()
+                });
+            };
+
+            ProductPresentationPage.prototype.renderScheduleDate = function (self, fromDate, toDate, index) {
+                if (index() != 0) {
+                    //get previous date and verify if it was the same
+                    if (self.product().ActiveSchedules[index()].DateFrom == self.product().ActiveSchedules[index() - 1].DateFrom
+                        && self.product().ActiveSchedules[index()].DateTo == self.product().ActiveSchedules[index() - 1].DateTo
+                    ) {
+                        fromDate = null;
+                        toDate = null;
+                    }
+                }
+
+                return self.renderScheduleFinalDate(self, fromDate, toDate);
+            };
+
+            ProductPresentationPage.prototype.renderScheduleDateForCompany = function (self, product, fromDate, toDate, index) {
+                if (index() != 0) {
+                    //get previous date and verify if it was the same
+                    if (product.ActiveSchedules[index()].DateFrom == product.ActiveSchedules[index() - 1].DateFrom
+                        && product.ActiveSchedules[index()].DateTo == product.ActiveSchedules[index() - 1].DateTo
+                    ) {
+                        fromDate = null;
+                        toDate = null;
+                    }
+                }
+
+                return self.renderScheduleFinalDate(self, fromDate, toDate);
+            };
+
+
+            ProductPresentationPage.prototype.renderScheduleFinalDate = function (self, fromDate, toDate) {
+
+                if (toDate == null && fromDate == null) {
+                    return "";
+                } else if (toDate == null && fromDate != null) {
+                    return self.renderDate(fromDate);
+                }
+
+                if (toDate == fromDate) {
+                    return self.renderDate(fromDate);
+                }
+
+                return self.renderDate(fromDate) + ' - ' + self.renderDate(toDate);
+            };
+
+
+            ProductPresentationPage.prototype.renderDate = function (date) {
+                if (date == null) return '';
+
+                var newDate = moment(date).tz("Europe/Oslo");
+                return newDate.format('l');
+            };
+
+            ProductPresentationPage.prototype.renderTime = function (timeFrom, timeTo) {
+                if ((timeTo == null) && (timeFrom != null)) {
+                    return timeFrom;
+                } else if ((timeTo != null) && (timeFrom != null)) {
+                    return timeFrom + '-' + timeTo;
+                }
+                return null;
+            };
+
+            ProductPresentationPage.prototype.getDateAsObject = function (date) {
+
+
+                var momentDate = new Date(parseInt(date.replace('/Date(', '').replace(')/', '')));
+                var newDate = moment(momentDate).tz("Europe/Oslo");
+                var formattedDate = {}
+                formattedDate.dayOfMonth = newDate.format('D');
+                formattedDate.month = newDate.format('MMM').replace('.', '');
+                formattedDate.dayOfWeek = newDate.format('dddd')[0].toUpperCase() + newDate.format('dddd').slice(1);
+                formattedDate.year = newDate.format('YYYY');
+
+                if (self.isNorvegianOrGermanLang()) {
+                    formattedDate.dayOfMonth = newDate.format('D') + ".";
+                }
+
+                return formattedDate;
+            };
+
+            ProductPresentationPage.prototype.isNorvegianOrGermanLang = function () {
+                var lang = self.language.toLowerCase();
+                if (lang.indexOf("no") == 0) {
+                    return true;
+                }
+                if (lang.indexOf("de") == 0) {
+                    return true;
+                }
+                return false;
+
+            }
+
+
+            ProductPresentationPage.prototype.getProductType = function () {
+                return self.product().ProductType;
+            };
+
+
+            ProductPresentationPage.prototype.activateMap = function (self) {
+                if (self.mapActivated) return;
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=' +
+                    self.googleMapApiKey +
+                    '&callback=productPresentation.initializeMap';
+                document.body.appendChild(script);
+                self.mapActivated = true;
+            };
+
+            ProductPresentationPage.prototype.initializeMap = function () {
+                var productPosition = new google.maps.LatLng(self.product().GeoLocation.Latitude, self.product().GeoLocation.Longitude);
+                var mapOptions = {
+                    zoom: parseInt(self.zoomLevel),
+                    center: productPosition
+                };
+
+                var map = new google.maps.Map(document.getElementById('map-canvas'),
+                    mapOptions);
+
+                google.maps.event.trigger(map, 'resize');
+
+                var marker = new google.maps.Marker({
+                    icon: self.markerIcon,
+                    position: productPosition,
+                    map: map,
+                    title: self.product().Name
+                });
+
+                if (self.mapRoads().length != 0) {
+                    $.each(self.mapRoads(), function (newIndex, newValue) {
+                        var kmlLayer = new google.maps.KmlLayer(newValue.Uri);
+                        kmlLayer.setMap(map);
+                    });
+                }
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        self.userLatitude(position.coords.latitude);
+                        self.userLongitude(position.coords.longitude);
+                        var pinIcon = new google.maps.MarkerImage(
+                            self.userMarkerIcon,
+                            null, /* size is determined at runtime */
+                            null, /* origin is 0,0 */
+                            new google.maps.Point(0, 22), /* if null anchor is bottom center of the scaled image */
+                            new google.maps.Size(43, 43)
+                        );
+                        var userMarker = new google.maps.Marker({
+                            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                            map: map,
+                            icon: pinIcon,
+                        });
+                        userMarker.setZIndex(2000002);
+
+                    }, function () {
+                        self.userLatitude(null);
+                        self.userLongitude(null);
+                    });
+                }
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    var product = self.product();
+                    var distance = getDistance(marker.position.lat(), marker.position.lng(), self.userLatitude(), self.userLongitude());
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: "<h5> <a href=\"" + product.ProductUrl + "\">" + product.Name + "</a></h5>" + (distance != null ? (self.distanceLabel + ": " + distance + "<br>") : "<br>") + product.About.Intro + "<br><br>"
+                    });
+
+                    infoWindow.open(map, marker);
+                });
+
+                //Getting distance from city center
+                /*
+                var mapCenter = new google.maps.LatLng(self.cityCenterLat, self.cityCenterLong);
+                var service = new google.maps.DistanceMatrixService();
+                service.getDistanceMatrix(
+                  {
+                      origins: [productPosition],
+                      destinations: [mapCenter],
+                      travelMode: google.maps.TravelMode.WALKING,
+                      avoidHighways: false,
+                      avoidTolls: false
+                  }, self.updatedistance);
+                  <!-- ko if: distance() != null -->        
+                        <div class="grid__item lap--two-fifths  l-top-gutter">
+                            <h1 class="subheading">Distance</h1>
+                            <p>City centre <span class="pib-distance-value" data-bind="text: distance()"></span></p>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if: product().Transport != 0 -->
+                        <div class="grid__item lap--three-fifths  l-top-gutter">
+                            <h1 class="subheading">Transport</h1>
+                            <p data-bind="text: product().TransportText"></p>
+                        </div>
+                    <!-- /ko -->
+
+                  */
+            };
+
+            ProductPresentationPage.prototype.updatedistance = function (response, status) {
+                if (status == google.maps.DistanceMatrixStatus.OK) {
+                    var origins = response.originAddresses;
+                    for (var i = 0; i < origins.length; i++) {
+                        var results = response.rows[i].elements;
+                        for (var j = 0; j < results.length; j++) {
+                            var element = results[j];
+                            self.distance(element.distance.text);
+                            //var duration = element.duration.text;
+                            //var from = origins[i];
+                            //var to = destinations[j];
+                        }
+                    }
+                }
+            };
+
+
+
+            ko.bindingHandlers.showScrollInfo = {
+                update: function (element, valueAccessor) {
+                    ko.utils.unwrapObservable(valueAccessor()); //grab a dependency to the obs array
+
+                    var t = $(element).parent(),
+                        init = function () {
+                            var tableWidth = t.width(),
+                                parent = t.parent('.table-wrapper'),
+                                icon = parent.siblings('.swipe-info');
+                            icon.hide();
+
+                            if (tableWidth > parent.width()) {
+                                icon.show();
+                            }
+                        };
+                    var max767Px = window.matchMedia("(max-width: 767px)");
+                    if (max767Px.matches) {
+                        init();
+                    }
+
+
+                    $(window).on('orientationchange', orientationChangeHandler);
+                    function orientationChangeHandler(e) {
+                        setTimeout(function () {
+                            init();
+                        }, 500);
+                    }
+
+
+                }
+            };
+            ProductPresentationPage.prototype.cropImages = function (element, index, data) {
+                navigation.imgEqualMargins($(element));
+            };
+
+
+
+            ProductPresentationPage.prototype.isSelected = function (dateFrom, timeFrom) {
+
+                var selectedDate = getQueryParameterByName('startDate');
+                var selectedTime = getQueryParameterByName('startTime');
+                if (selectedDate && selectedTime && dateFrom && timeFrom) {
+
+                    if (dateFrom.replace('/Date(', '').replace(')/', '') === selectedDate && timeFrom.replace('/Date(', '').replace(')/', '') === selectedTime) {
+                        return 'selected';
+                    }
+                }
+                return 'regular';
+            }
+
+            var getQueryParameterByName = function (name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+
+            ProductPresentationPage.prototype.highlightEvent = function () {
+
+            };
+
+
+
+
+            //Return created object
+            return ProductPresentationPage;
+        })();
+        Internet.ProductPresentationPage = ProductPresentationPage;
+    })(VisitOslo.Internet || (VisitOslo.Internet = {}));
+
+})(VisitOslo || (VisitOslo = {}));
+
+/// <summary>update CurrentScheduleDetails with ticket-informaion for each event</summary>
+function updateEvents(event, tellusChannel) {
+    var id = event.CurrentScheduleDetails.TicketInfo.ID
+    if (typeof id != "undefined" && id.length > 7) {
+        var TicketMasterWrapperUrl = "https://integrator.tellus.no/import/TIcketSystemWrapper2/?idlist=";
+        var requestUrl = TicketMasterWrapperUrl + id + "&channel=" + tellusChannel;
+        var promise = $.ajax({
+            url: requestUrl,
+            success: function (jsonData) {
+                var data = JSON.parse(jsonData);
+                event.CurrentScheduleDetails.TicketInfo.BookingUrl(data.events[0].bookingurl);
+                event.CurrentScheduleDetails.TicketInfo.Status(getStatus(data.events[0], event.CurrentScheduleDetails.TicketInfo.Status()));
+            }
+        });
+        return promise;
+    }
+};
+
+function getStatus(data, oldStatus) {
+    if (data.seats_avail && data.seats_avail == "True")
+        return "TicketsAvailable";
+    if (data.canceled && data.canceled == "True")
+        return "Cancelled";
+    if (data.sold_out && data.sold_out == "True")
+        return "SoldOut";
+    if (typeof oldStatus != "undefined")
+        return oldStatus;
+    return "InfoNotAvailable";
+};
+
+/// <summary>create knockout objects for Status and BookingUrl</summary>
+function transform(day) {
+    day.Products = ko.observableArray(day.Products.map(function (product) {
+        product.CurrentScheduleDetails.TicketInfo.Status = ko.observable(product.CurrentScheduleDetails.TicketInfo.Status);
+        product.CurrentScheduleDetails.TicketInfo.BookingUrl = ko.observable(product.CurrentScheduleDetails.TicketInfo.BookingUrl);
+        return product;
+    }));
+    return day;
+}

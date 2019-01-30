@@ -1,0 +1,57 @@
+[0113/234316.392:INFO:scoped_logging.cc(58)] Starting logs for version: 36.184.200
+[0113/234316.679:INFO:crashpad_crash_reporter.cc(157)] Crash handler launched and ready.
+[0113/234316.679:INFO:chrome_reporter_main.cc(186)] --enable-crash-reporting --use-crash-handler-with-id="\\.\pipe\crashpad_3692_AMEGQWLJKWVTQAGG" --sandboxed-process-id=2 --init-done-notifier=748 --sandbox-mojo-pipe-token=11525245403457922447 --mojo-platform-channel-handle=684 --engine=2
+[0113/234316.680:WARNING:chrome_util.cc(41)] Can't get Chrome version information from flag: The chrome-version switch was not set.
+[0113/234316.707:INFO:crashpad_crash_client.cc(251)] Found 0 completed crash reports
+[0113/234316.708:INFO:crashpad_crash_client.cc(270)] Found 0 pending crash reports
+[0113/234316.711:INFO:chrome_reporter_main.cc(199)] Crash reporting initialized.
+[0113/234316.720:INFO:libraries.cc(45)] Extracting edls_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\36.184.200
+[0113/234316.750:INFO:libraries.cc(45)] Extracting em000_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\36.184.200
+[0113/234316.766:INFO:libraries.cc(45)] Extracting em001_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\36.184.200
+[0113/234316.797:INFO:libraries.cc(45)] Extracting em002_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\36.184.200
+[0113/234316.830:INFO:libraries.cc(45)] Extracting em003_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\36.184.200
+[0113/234316.860:INFO:libraries.cc(45)] Extracting em004_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\36.184.200
+[0113/234316.962:INFO:libraries.cc(45)] Extracting em005_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\36.184.200
+[0113/234322.416:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0113/234322.493:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0113/234322.494:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0113/235557.535:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0113/235557.535:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0121/133700.513:INFO:scoped_logging.cc(58)] Starting logs for version: 37.186.201
+[0121/133700.687:INFO:crashpad_crash_reporter.cc(157)] Crash handler launched and ready.
+[0121/133700.687:INFO:chrome_reporter_main.cc(187)] --enable-crash-reporting --use-crash-handler-with-id="\\.\pipe\crashpad_10756_KKOQMRMRTHENOAAQ" --sandboxed-process-id=2 --init-done-notifier=760 --sandbox-mojo-pipe-token=14878968951672484434 --mojo-platform-channel-handle=704 --engine=2
+[0121/133700.688:WARNING:chrome_util.cc(41)] Can't get Chrome version information from flag: The chrome-version switch was not set.
+[0121/133700.689:INFO:crashpad_crash_client.cc(251)] Found 0 completed crash reports
+[0121/133700.715:INFO:crashpad_crash_client.cc(270)] Found 0 pending crash reports
+[0121/133700.716:INFO:chrome_reporter_main.cc(200)] Crash reporting initialized.
+[0121/133700.723:INFO:libraries.cc(45)] Extracting edls_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.186.201
+[0121/133700.753:INFO:libraries.cc(45)] Extracting em000_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.186.201
+[0121/133700.768:INFO:libraries.cc(45)] Extracting em001_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.186.201
+[0121/133700.795:INFO:libraries.cc(45)] Extracting em002_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.186.201
+[0121/133700.820:INFO:libraries.cc(45)] Extracting em003_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.186.201
+[0121/133700.851:INFO:libraries.cc(45)] Extracting em004_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.186.201
+[0121/133700.889:INFO:libraries.cc(45)] Extracting em005_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.186.201
+[0121/133702.637:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0121/133702.669:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0121/133702.670:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0121/134234.641:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0121/134234.641:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0128/204437.020:INFO:scoped_logging.cc(58)] Starting logs for version: 37.187.200
+[0128/204437.115:INFO:crashpad_crash_reporter.cc(157)] Crash handler launched and ready.
+[0128/204437.131:INFO:chrome_reporter_main.cc(187)] --enable-crash-reporting --use-crash-handler-with-id="\\.\pipe\crashpad_11572_ULMDDHWXNXKAOLDS" --sandboxed-process-id=2 --init-done-notifier=740 --sandbox-mojo-pipe-token=11238742300295546599 --mojo-platform-channel-handle=684 --engine=2
+[0128/204437.131:WARNING:chrome_util.cc(41)] Can't get Chrome version information from flag: The chrome-version switch was not set.
+[0128/204437.131:INFO:crashpad_crash_client.cc(251)] Found 0 completed crash reports
+[0128/204437.131:INFO:crashpad_crash_client.cc(270)] Found 0 pending crash reports
+[0128/204437.131:INFO:chrome_reporter_main.cc(200)] Crash reporting initialized.
+[0128/204437.135:INFO:libraries.cc(45)] Extracting edls_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.187.200
+[0128/204437.151:INFO:libraries.cc(45)] Extracting em000_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.187.200
+[0128/204437.167:INFO:libraries.cc(45)] Extracting em001_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.187.200
+[0128/204437.182:INFO:libraries.cc(45)] Extracting em002_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.187.200
+[0128/204437.198:INFO:libraries.cc(45)] Extracting em003_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.187.200
+[0128/204437.233:INFO:libraries.cc(45)] Extracting em004_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.187.200
+[0128/204437.265:INFO:libraries.cc(45)] Extracting em005_64.dll to c:\users\azadkillaz94\appdata\local\google\chrome\user data\swreporter\37.187.200
+[0128/204437.593:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0128/204437.640:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0128/204437.640:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0128/204924.197:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten
+[0128/204924.197:WARNING:crash_keys.cc(37)] Crash key "stage" being overwritten

@@ -1,0 +1,26 @@
+[2019-01-18 13:42:02.747] [exthost] [info] extension host started
+[2019-01-18 13:42:02.775] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch {"startup":true,"activationEvent":"*"}
+[2019-01-18 13:42:02.775] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\debug-auto-launch\dist\extension
+[2019-01-18 13:42:02.788] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet {"startup":true,"activationEvent":"*"}
+[2019-01-18 13:42:02.788] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\emmet\dist\extension
+[2019-01-18 13:42:02.842] [exthost] [info] ExtensionService#_doActivateExtension vscode.git {"startup":true,"activationEvent":"*"}
+[2019-01-18 13:42:02.842] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\main
+[2019-01-18 13:42:03.053] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict {"startup":true,"activationEvent":"*"}
+[2019-01-18 13:42:03.053] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\merge-conflict\dist\extension
+[2019-01-18 13:42:03.069] [exthost] [info] eager extensions activated
+[2019-01-18 13:42:34.947] [exthost] [info] ExtensionService#_doActivateExtension vscode.typescript-language-features {"startup":false,"activationEvent":"onLanguage:javascript"}
+[2019-01-18 13:42:34.947] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\typescript-language-features\dist\extension
+[2019-01-18 13:44:48.107] [exthost] [info] ExtensionService#_doActivateExtension vscode.extension-editing {"startup":false,"activationEvent":"onLanguage:markdown"}
+[2019-01-18 13:44:48.107] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\extension-editing\dist\extension
+[2019-01-18 13:44:48.190] [exthost] [info] ExtensionService#_doActivateExtension vscode.markdown-language-features {"startup":false,"activationEvent":"onLanguage:markdown"}
+[2019-01-18 13:44:48.190] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\markdown-language-features\dist\extension
+[2019-01-18 13:44:48.529] [exthost] [info] ExtensionService#_doActivateExtension vscode.css-language-features {"startup":false,"activationEvent":"onLanguage:css"}
+[2019-01-18 13:44:48.529] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\css-language-features\client\dist\cssMain
+[2019-01-18 13:44:48.584] [exthost] [info] ExtensionService#_doActivateExtension vscode.configuration-editing {"startup":false,"activationEvent":"onLanguage:json"}
+[2019-01-18 13:44:48.584] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\configuration-editing\dist\extension
+[2019-01-18 13:44:48.596] [exthost] [info] ExtensionService#_doActivateExtension vscode.json-language-features {"startup":false,"activationEvent":"onLanguage:json"}
+[2019-01-18 13:44:48.596] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\json-language-features\client\dist\jsonMain
+[2019-01-18 13:44:48.679] [exthost] [info] ExtensionService#_doActivateExtension vscode.npm {"startup":false,"activationEvent":"onLanguage:json"}
+[2019-01-18 13:44:48.679] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\npm\dist\main
+[2019-01-18 13:44:48.716] [exthost] [info] ExtensionService#_doActivateExtension vscode.html-language-features {"startup":false,"activationEvent":"onLanguage:html"}
+[2019-01-18 13:44:48.716] [exthost] [info] ExtensionService#loadCommonJSModule c:\Users\AzadKillaz94\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\html-language-features\client\dist\htmlMain

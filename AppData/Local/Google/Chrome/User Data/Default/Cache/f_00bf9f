@@ -1,0 +1,653 @@
+﻿/* eslint-disable */
+var VisitOslo;
+(function (VisitOslo) {
+    (function (Internet) {
+        var ProductListingPage = (function () {
+            //Object initialization
+            function ProductListingPage(tellusChannel, containerId, serviceUrl, pageId, pageIndex, pageSize, language, centerLatitude, centerLongitude, zoomLevel, sortCriteria, distanceSortCriteria, publishingFilterIds, viewType, markerIcon, userMarkerIcon, messageField, messageNotAllowed, messageError, distanceLabel, requiredNumberOfImages) {
+                var self = this;
+                self.tellusChannel = tellusChannel;
+                self.containerId = '#' + containerId;
+                self.serviceUrl = serviceUrl;
+                self.pageSize = pageSize;
+                self.pageId = pageId;
+                self.products = ko.observableArray();
+                self.productsPaging = ko.observableArray();
+                self.productsCount = 0;
+
+                self.customAeaIds = ko.observableArray();
+                self.customAeaControlIds = ko.observableArray($.getUrlVar('areaIds') !== undefined ? $.getUrlVar('areaIds').split(",") : []);
+                self.facilityIds = ko.observableArray();
+                self.facilityControlIds = ko.observableArray($.getUrlVar('facilityIds') != undefined ? $.getUrlVar('facilityIds').split(",") : []);
+                self.userLongitude = ko.observable(null);
+                self.userLatitude = ko.observable(null);
+                self.maxAvailablePagerIndex = ko.observable(0);
+                self.numberOfPagers = ko.observable(0);
+                self.requiredNumberOfImages = ko.observable(requiredNumberOfImages);
+                self.language = language;
+                self.viewType = viewType;
+                self.markerIcon = markerIcon;
+                self.userMarkerIcon = userMarkerIcon;
+                self.productUrl =
+                    //for map view
+                self.chunkedProductList = ko.observableArray();
+
+                self.currentMapHash = ko.observable();
+
+                self.pageIndex = ko.observable(pageIndex);
+                self.categoryIds = new Array();
+                self.centerLatitude = centerLatitude;
+                self.centerLongitude = centerLongitude;
+                self.zoomLevel = zoomLevel;
+                self.markers = [];
+                self.userMarkers = [];
+                self.map;
+                self.standardSortCriteria = sortCriteria;
+                self.sortCriteria = ko.observable(sortCriteria);
+                self.distanceSortCriteria = distanceSortCriteria;
+                self.publishingFilterIds = publishingFilterIds;
+                self.infowindow;
+                self.mapUnavailableMarkers = 0;
+                self.checkFirstLoad = false;
+
+                self.messageField = messageField;
+                self.messageNotAllowed = messageNotAllowed;
+                self.messageError = messageError;
+                self.distanceLabel = distanceLabel;
+
+                self.lastRequest = null;
+
+                function initialize() {
+                    var centerPoint = new google.maps.LatLng(self.centerLatitude, self.centerLongitude);
+                    var mapOptions = {
+                        zoom: parseInt(self.zoomLevel),
+                        center: centerPoint
+                    };
+                    self.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+                    //initialize markers first time
+                    $.each(self.markers, function(index, value) {
+                        value.setMap(self.map);
+                    });
+
+                    $.each(self.userMarkers, function (index, value) {
+                        value.setMap(self.map);
+                    });
+
+                    self.updateCurrentLocation(self, new VisitOslo.Internet.ProductListPageUrlHandler(window.location.hash));
+
+                    //var currentConfiguration = new VisitOslo.Internet.ProductListPageUrlHandler(window.location.hash);
+                    //self.tryGetGeolocation(null, currentConfiguration, currentConfiguration.geolocation);
+                }
+
+                if (self.viewType == "map" || self.viewType == "fullMap") {
+                    google.maps.event.addDomListener(window, 'load', initialize);
+                }
+
+
+                //update filters with values from query
+                self.customAeaControlIds().forEach(function(item, index) {
+                    if (item !== undefined) {
+                        $(item).addClass("active");
+                        self.customAeaIds.push($(item).attr("data-item"));
+                    }
+
+                });
+                //update filters with values from query
+                self.facilityControlIds().forEach(function(item, index) {
+                    if (item !== undefined) {
+                        $(item).addClass("active");
+                        self.facilityIds.push($(item).attr("data-item"));
+                    }
+                });
+
+                self.chunkProducts = function() {
+                    var result = [];
+                    var chunk = [];
+                    var counter = 0;
+                    result.push(chunk);
+                    var productIndex = 0;
+                    self.products().forEach(function(item, index) {
+                        if (item.GeoLocation != null) {
+
+                            item.ProductIndex = productIndex;
+
+                            if (counter === Math.ceil((self.products().length - self.mapUnavailableMarkers) / 3)) {
+
+                                chunk = [];
+                                result.push(chunk);
+                                counter = 0;
+                            };
+
+                            chunk.push(item);
+                            productIndex++;
+                            counter++;
+                        }
+                    });
+                    self.chunkedProductList(result);
+                };
+                self.filterCategories = function(areaId, item) {
+                    if (self.categoryIds.indexOf(areaId) == -1) {
+                        self.categoryIds.push(areaId);
+                        $(item).addClass("active");
+                    } else {
+                        self.categoryIds.splice(self.categoryIds.indexOf(areaId), 1);
+                        $(item).removeClass("active");
+                    }
+                    self.pageIndex(1);
+                    this.loadProducts(self, self.pageIndex());
+                };
+
+                self.addMarker = function (latitude, longitude, addPopup, title, description, labelText, productUrl, icon, zIndex, markerAnchor, iconSize, userMarker) {
+
+                    if (latitude !== null && longitude !== null) {
+                        var pinIcon = new google.maps.MarkerImage(
+                            icon,
+                            null, /* size is determined at runtime */
+                            null, /* origin is 0,0 */
+                            markerAnchor, /* if null anchor is bottom center of the scaled image */
+                            iconSize
+                        );
+                        var marker = new MarkerWithLabel({
+                            position: new google.maps.LatLng(latitude, longitude),
+                            map: self.map,
+                            title: title,
+                            icon: pinIcon,
+                            //labelContent: labelText,
+                            //labelAnchor: new google.maps.Point(15, 42),
+                            //labelClass: "map-marker-label", // the CSS class for the label
+                            //labelInBackground: false
+                        });
+                        if (zIndex != null) {
+                            marker.setZIndex(zIndex);
+                        }
+
+                        if (addPopup){
+                            google.maps.event.addListener(marker, 'click', function() {
+                                runPopUp(title, description, marker, productUrl);
+                            });
+                        }
+                        if (userMarker) {
+                            self.userMarkers.push(marker);
+                        } else {
+                            self.markers.push(marker);
+                        }
+                    }
+                };
+
+                self.addUserMarker = function (latitude, longitude) {
+                    self.addMarker(latitude, longitude, false, "", "", "", "", self.userMarkerIcon, 2000002, new google.maps.Point(0, 22), new google.maps.Size(43, 43), true);
+                };
+
+                function runPopUp(title, description, marker, productUrl) {
+                    if (self.infowindow) {
+                        self.infowindow.close();
+                    }
+                    var distance = getDistance(marker.position.lat(), marker.position.lng(), self.userLatitude(), self.userLongitude());
+                    self.infowindow = new google.maps.InfoWindow({
+                        content: "<h5> <a href=\"" + productUrl + "\">" + title + "</a></h5>"+(distance != null ? (self.distanceLabel + ": " + distance + "<br>"): "<br>" )+ description + "<br><br>"
+                    });
+                    scrollTo(0, document.querySelector("#map-canvas").offsetTop - 70);
+                    self.infowindow.open(self.map, marker);
+                }
+
+                self.selectMarker = function(index, title, description, productUrl) {
+                    runPopUp(title, description, self.markers[index], productUrl);
+                };
+
+                self.setAllMap = function(map) {
+                    for (var i = 0; i < self.markers.length; i++) {
+                        self.markers[i].setMap(map);
+                    }
+                    for (var j = 0; j < self.userMarkers.length; j++) {
+                        self.userMarkers[j].setMap(map);
+                    }
+                };
+
+                self.clearMarkers = function() {
+                    self.setAllMap(null);
+
+                };
+                self.removeMarkers = function() {
+                    self.clearMarkers();
+                    self.markers = [];
+                    self.userMarkers = [];
+                };
+
+
+                self.mapViewUrl = ko.computed(function() {
+                    return "?viewType=map" + "#" + self.currentMapHash();
+                });
+
+                self.listViewUrl = ko.computed(function() {
+                    return "?viewType=list" + "#" + self.currentMapHash();
+                });
+
+                self.wallViewUrl = ko.computed(function() {
+                    return "?viewType=wall";// + "#" + self.currentMapHash();
+                });
+
+                self.tileStyling = function (currentProduct) {
+                    
+                    var tileClass = "";
+                    var imgSrc = "";
+                    if (currentProduct.TeaserImage == null || currentProduct.TeaserImage == undefined || currentProduct.LargeTeaserImage == null || currentProduct.LargeTeaserImage == undefined) {
+                        tileClass += "no-image-tile ";
+                    }
+
+                    var randNum = Math.floor((Math.random() * 5)); //0-4
+                    var imgAspectRatio = 0;
+                    var tileAspectRatio = 1.5; // counted manually
+
+                    if (window.matchMedia("(max-width: 481px)").matches) {
+                        tileClass += "mobile-tile";
+                        currentProduct.selectedImgScr = currentProduct.LargeTeaserImage.Uri;
+                        imgAspectRatio = currentProduct.LargeTeaserImage.Width / currentProduct.LargeTeaserImage.Height;
+                        if (imgAspectRatio < tileAspectRatio) {
+                            tileClass += " narrow-tile";
+                        } else {
+                            tileClass += " wide-tile";
+                        }
+                        return tileClass;
+                    }
+
+                    if (randNum === 0) {
+                        tileClass += "big-tile";
+                        currentProduct.selectedImgScr = currentProduct.LargeTeaserImage.Uri;
+                        imgAspectRatio = currentProduct.LargeTeaserImage.Width / currentProduct.LargeTeaserImage.Height;
+                        if (imgAspectRatio < tileAspectRatio) {
+                            tileClass += " narrow-tile";
+                        } else {
+                            tileClass += " wide-tile";
+                        }
+
+                    } else {
+                        tileClass += "small-tile";
+                        currentProduct.selectedImgScr = currentProduct.TeaserImage.Uri;
+                        imgAspectRatio = currentProduct.TeaserImage.Width / currentProduct.TeaserImage.Height;
+                        if (imgAspectRatio < tileAspectRatio) {
+                            tileClass += " narrow-tile";
+                        } else {
+                            tileClass += " wide-tile";
+                        }
+                    }
+                    return tileClass;
+                };
+
+                self.filterCustomArea = function (areaId, item) {
+
+                    var currentConfiguration = new VisitOslo.Internet.ProductListPageUrlHandler(window.location.hash);
+                    if (currentConfiguration.areas.indexOf(areaId) == -1) {
+                        currentConfiguration.AddArea(areaId);
+                        $(item).addClass("active");
+                    } else {
+                        currentConfiguration.RemoveArea(areaId);
+                        $(item).removeClass("active");
+                    }
+                    currentConfiguration.SetPage(1);
+                    window.location.hash = currentConfiguration.GetHash();
+                };
+
+                self.filterFacility = function(areaId, item) {
+
+                    var currentConfiguration = new VisitOslo.Internet.ProductListPageUrlHandler(window.location.hash);
+                    if (currentConfiguration.facilities.indexOf(areaId) == -1) {
+                        currentConfiguration.AddFacility(areaId);
+                        $(item).addClass("active");
+                    } else {
+                        currentConfiguration.RemoveFacility(areaId);
+                        $(item).removeClass("active");
+                    }
+                    currentConfiguration.SetPage(1);
+                    window.location.hash = currentConfiguration.GetHash();
+                };
+
+                self.filterGeolocation = function(item) {
+                    var currentConfiguration = new VisitOslo.Internet.ProductListPageUrlHandler(window.location.hash);
+                    self.tryGetGeolocation(item, currentConfiguration, !currentConfiguration.geolocation);
+                };
+
+                self.tryGetGeolocation = function (item, currentConfiguration, tryRunGeolocation) {
+                    var startingGeolocation = currentConfiguration.geolocation;
+                    if (tryRunGeolocation) {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(function(position) {
+                                currentConfiguration.SetGeolocation();
+                                self.userLatitude(position.coords.latitude);
+                                self.userLongitude(position.coords.longitude);
+                                $(item).addClass("active");
+                                $(messageField).hide();
+                                if (startingGeolocation != currentConfiguration.geolocation) {
+                                    currentConfiguration.SetPage(1);
+                                    window.location.hash = currentConfiguration.GetHash();
+                                }
+                                self.loadProducts(self, currentConfiguration);
+                                self.updateCurrentLocation(self, currentConfiguration);
+
+                            }, function() {
+                                currentConfiguration.RemoveGeolocation();
+                                self.userLatitude(null);
+                                self.userLongitude(null);
+                                $(item).removeClass("active");
+                                $(messageField).text(self.messageNotAllowed);
+                                $(messageField).show();
+                                if (startingGeolocation != currentConfiguration.geolocation) {
+                                    currentConfiguration.SetPage(1);
+                                    window.location.hash = currentConfiguration.GetHash();
+                                }
+                                self.loadProducts(self, currentConfiguration);
+                                self.updateCurrentLocation(self, currentConfiguration);
+                            });
+                        } else {
+                            currentConfiguration.RemoveGeolocation();
+                            self.userLatitude(null);
+                            self.userLongitude(null);
+                            $(item).removeClass("active");
+                            $(messageField).text(self.messageError);
+                            $(messageField).show();
+                            if (startingGeolocation != currentConfiguration.geolocation) {
+                                currentConfiguration.SetPage(1);
+                                window.location.hash = currentConfiguration.GetHash();
+                            }
+                            self.loadProducts(self, currentConfiguration);
+                            self.updateCurrentLocation(self, currentConfiguration);
+                        }
+                    }
+                    else {
+                        currentConfiguration.RemoveGeolocation();
+                        self.userLatitude(null);
+                        self.userLongitude(null);
+                        $(item).removeClass("active");
+                        $(messageField).hide();
+                        if (startingGeolocation != currentConfiguration.geolocation) {
+                            currentConfiguration.SetPage(1);
+                            window.location.hash = currentConfiguration.GetHash();
+                        }
+                        self.loadProducts(self, currentConfiguration);
+                        self.updateCurrentLocation(self, currentConfiguration);
+                    }
+                }
+
+                $(self.containerId).on('click', '.pagination-box a', function() {
+
+                    var currentConfiguration = new VisitOslo.Internet.ProductListPageUrlHandler(window.location.hash);
+                    currentConfiguration.SetPage($(this).data('page'));
+                    window.location.hash = currentConfiguration.GetHash();
+                    //window.scroll(0, 0);
+                    
+                    $("html, body").animate({ scrollTop: $(".misc-content-listing").offset().top }, 20);
+                    //self.loadProducts(self, currentConfiguration, true);
+                });
+
+                $(self.containerId).on('click', '.superpagination-box a', function () {
+                    self.loadMoreProducts(self);
+                });
+                
+                var loaded = false;
+
+                Sammy(function () {
+                    this.disable_push_state = true;
+
+                    this.get('#:path', function () {
+                        var filterConfiguration2 = new VisitOslo.Internet.ProductListPageUrlHandler(this.params.path);
+                        self.tryGetGeolocation(null, filterConfiguration2, filterConfiguration2.geolocation);
+                        loaded = true;
+                    });
+                }).run();
+                
+                if (!loaded) {
+                    var filterConfiguration = new VisitOslo.Internet.ProductListPageUrlHandler(location.hash);
+
+                    if (filterConfiguration.facilities.length > 0 || filterConfiguration.areas.length > 1)
+                        $(".js-toogle-click").trigger("click");
+
+                    self.tryGetGeolocation(null, filterConfiguration, filterConfiguration.geolocation);
+                }
+            };
+
+            ProductListingPage.prototype.cropImages = function(element, index, data) {
+                    navigation.imgEqualMargins($(element));
+                },
+                ProductListingPage.prototype.adjustPaging = function(data) {
+
+                    function applyAdjustment() {
+
+                        if ($('.pagination-box ol').children('li').length == 10) {
+                            var currentPage = $('.pb-current-page').parent('li');
+                            var elWidth = $('.pagination-box').width(),
+                                parentWidth = $('.pagination-box').parents('.main-flow').width();
+
+                            var n = 1,
+                                max = 5;
+
+                            while (elWidth > parentWidth && max > 0) {
+                                $('.pagination-box li:nth-last-child(' + n + ')').hide();
+                                n++;
+                                max--;
+                                elWidth = $('.pagination-box').width();
+                            }
+                        }
+                    }
+
+                    applyAdjustment();
+                    window.addEventListener("orientationchange", applyAdjustment);
+
+                },
+                ProductListingPage.prototype.applyConfiguration = function(self, filterConfiguration) {
+                    self.currentMapHash(filterConfiguration.GetHash(true));
+
+                    self.facilityIds(filterConfiguration.facilities);
+                    self.customAeaIds(filterConfiguration.areas);
+                    self.pageIndex(filterConfiguration.page == null ? 1 : filterConfiguration.page);
+                    self.sortCriteria(filterConfiguration.geolocation ? self.distanceSortCriteria : self.standardSortCriteria);
+                    self.applayFilterState(self, filterConfiguration);
+                },
+                ProductListingPage.prototype.applayFilterState = function(self, filterConfiguration) {
+
+                    $(".lfd-category-box-facility").removeClass("active");
+                    $(".lfd-category-box-area").removeClass("active");
+                    $(".lfd-category-box-geolocation").removeClass("active");
+
+                    if (filterConfiguration.facilities.length > 0) {
+                        $.each(filterConfiguration.facilities, function(index, value) {
+                            $("#chk-facility-" + value).addClass("active");
+                        });
+                    }
+
+                    if (filterConfiguration.areas.length > 0) {
+                        $.each(filterConfiguration.areas, function(index, value) {
+                            $("#chk-area-" + value).addClass("active");
+                        });
+                    }
+
+                    if (filterConfiguration.geolocation) {
+                        $("#chk-geolocation-1").addClass("active");
+                    }
+                },
+                ProductListingPage.prototype.updateCurrentLocation = function(self, filterConfiguration) {
+
+                    if ((self.viewType == "map" || self.viewType == "fullMap") && self.map) {
+                        {
+                            if (filterConfiguration.geolocation) {
+                                self.map.panTo(new google.maps.LatLng(self.userLatitude(), self.userLongitude()));
+                                self.map.setZoom(parseInt(self.zoomLevel));
+
+                                self.addUserMarker(self.userLatitude(), self.userLongitude());
+                            } else {
+                                self.map.panTo(new google.maps.LatLng(self.centerLatitude, self.centerLongitude));
+                            }
+                        }
+                    }
+                },
+                ProductListingPage.prototype.setUpUserMaker = function(self, filterConfiguration) {
+
+                    if (self.viewType == "map" || self.viewType == "fullMap") {
+                        {
+                            if (filterConfiguration.geolocation) {
+                                self.addUserMarker(self.userLatitude(), self.userLongitude());
+                            }
+                        }
+                    }
+                },
+                ProductListingPage.prototype.loadMoreProducts = function(self, callback) {
+                    if (self.pageIndex() < self.numberOfPagers()) {
+                        var currentConfiguration = new VisitOslo.Internet.ProductListPageUrlHandler(window.location.hash);
+                        var nextIndex = self.pageIndex() + 1;
+                        currentConfiguration.SetPage(nextIndex);
+                        var callbackParameter = nextIndex < self.numberOfPagers();
+                        self.loadProducts(self, currentConfiguration, true, callback, callbackParameter);
+                    }
+                    else {
+                        callback(false);
+                    }
+                };
+
+            ProductListingPage.prototype.loadProducts = function (self, filterConfiguration, appendProductList, callback, callbackParameter) {
+
+                self.applyConfiguration(self, filterConfiguration);
+
+                if (self.viewType == "fullMap") {
+                    self.products.removeAll();
+                    self.removeMarkers();
+                    self.chunkProducts();
+                }
+                if (self.viewType != "fullMap" || (self.viewType == "fullMap" && self.categoryIds.length > 0)) {
+
+                    if (self.viewType != "wall") {
+                        $(".preloader-overlay").show();
+                    }
+                   
+                    self.removeMarkers();
+                    if (self.lastRequest != null && self.lastRequest.abort != null) {
+                        self.lastRequest.abort();
+                    }
+                    self.lastRequest = $.getJSON(self.serviceUrl +
+                        '?PageId=' + self.pageId +
+                        '&PageIndex=' + self.pageIndex() +
+                        '&PageSize=' + self.pageSize +
+                        "&CustomAreaIds=" + self.customAeaIds().join() +
+                        "&FacilityIds=" + self.facilityIds().join() +
+                        "&Language=" + self.language +
+                        "&CategoryIds=" + self.categoryIds.join() +
+                        "&SortCriterias=" + self.sortCriteria() +
+                        "&PublishingFilterIds=" + self.publishingFilterIds +
+                        "&Latitude=" + self.userLatitude() +
+                        "&Longitude=" + self.userLongitude() +
+                        "&RequiredNumberOfImages=" + self.requiredNumberOfImages()
+                        )
+                        .done(function (data) {
+                            self.mapUnavailableMarkers = 0;
+                            if (!appendProductList)
+                                self.products.removeAll();
+
+
+                            $(".preloader-overlay").hide();
+                            var i = 1;
+                         
+                            if ((self.viewType == "map" || self.viewType == "fullMap"))
+                            {
+                                self.removeMarkers();
+                                $.each(data.Products, function (newIndex, newValue) {
+                                    newValue.mapIndex = i;
+                                    if (newValue.GeoLocation != null) {
+                                        self.addMarker(newValue.GeoLocation.Latitude, newValue.GeoLocation.Longitude, true, newValue.Name, newValue.Introduction != undefined ? newValue.Introduction.substring(0, 100) + "..." : "", i, newValue.ProductUrl, self.markerIcon, null, null, new google.maps.Size(26, 29), false);
+                                        i++;
+                                    } else {
+                                        self.mapUnavailableMarkers++;
+                                    }
+                                    self.products.push(newValue);
+                                });
+
+
+                                  self.setUpUserMaker(self, filterConfiguration);
+                            } else {
+
+                                self.products(self.products().concat(data.Products));
+                                //$.each(data.Products, function (newIndex, newValue) {
+                                    
+                                //    self.products.push(newValue);
+                                //});
+                            }
+                          
+
+                           
+                            self.chunkProducts();
+//                            if (document.querySelector("#scroll-anchor") !== null && document.querySelector("#scroll-anchor") !== undefined) {
+//                                scrollTo(0, $(window).scrollTop() + document.querySelector("#scroll-anchor").offsetTop);
+//                            }
+                            //Generate pagging
+                            self.productsCount = data.ProductsCount;
+                            self.createPaging(self, self.pageIndex());
+
+                            if (self.checkFirstLoad == false) {
+                                window.scrollTo(0, 0);
+                                self.checkFirstLoad = true;
+                            }
+                            var link;
+                            if (document.URL.indexOf('?viewType=list') != -1) {
+                                link = $('.view-switcher').find('.font-icon-switcher.list');
+                                $('.view-switcher a').removeClass('active');
+                                link.addClass('active');
+
+                            }else if (document.URL.indexOf('?viewType=map') != -1) {
+                                link = $('.view-switcher').find('.font-icon-switcher.map');
+                                $('.view-switcher a').removeClass('active');
+                                link.addClass('active');
+                            } else if (document.URL.indexOf('?viewType=wall') != -1) {
+                                link = $('.view-switcher').find('.font-icon-switcher.tiles');
+                                $('.view-switcher a').removeClass('active');
+                                link.addClass('active');
+
+                            } else if ($('.view-switcher').find('.active').length) {
+                                link = $('.view-switcher').find('.active');
+                            } else {
+                                return;
+                            }
+                            link.on('click', function (e) {
+                                e.preventDefault();
+                            });
+
+                        })
+                        .fail(function(jqXhr, textStatus, err) {
+                            console.log(err);
+                            $(".preloader-overlay").hide();
+                        })
+                        .always(function () {
+                            self.lastRequest = null;
+                            if (typeof callback !== 'undefined' && typeof callbackParameter !== 'undefined') {
+                                callback(callbackParameter);
+                            }
+                    });
+                }
+            };
+
+            ProductListingPage.prototype.createPaging = function (self, pageIndex) {
+                var pagerSize = 10;
+                self.pageIndex(pageIndex);
+
+                self.productsPaging.removeAll();
+                if (self.productsCount > 0) {
+                    self.numberOfPagers(Math.ceil(self.productsCount / self.pageSize));
+                    var startPage = ((Math.ceil(pageIndex / (pagerSize - 1)) - 1) * (pagerSize - 1)) + 1;
+
+                    self.maxAvailablePagerIndex(startPage + pagerSize - 1);
+                    self.maxAvailablePagerIndex(self.maxAvailablePagerIndex() > self.numberOfPagers() ? self.numberOfPagers() : self.maxAvailablePagerIndex());
+                    for (var i = startPage; i <= self.maxAvailablePagerIndex() ; i++) {
+                        self.productsPaging.push(i);
+                    }
+                    return;
+                }
+                return;
+            };
+
+ 
+
+             
+
+            //Return created object
+            return ProductListingPage;
+        })();
+        Internet.ProductListingPage = ProductListingPage;
+    })(VisitOslo.Internet || (VisitOslo.Internet = {}));
+
+})(VisitOslo || (VisitOslo = {}));

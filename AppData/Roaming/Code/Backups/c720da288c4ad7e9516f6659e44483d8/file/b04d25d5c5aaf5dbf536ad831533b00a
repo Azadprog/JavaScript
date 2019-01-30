@@ -1,0 +1,26 @@
+file:///c%3A/Users/AzadKillaz94/Desktop/Ovingsoppgave_fontstorrelse/index.js
+// Referanse til DOM-elementet <p id="pText">
+var pTextElement = document.getElementById("pText");
+var userInput = document.getElementById("int");
+var btnElement = document.getElementById("btn");
+
+btnElement.addEventListener(click, function() {
+
+    document.write(changeSize);
+
+});
+
+
+function changeSize () {
+
+ 
+
+}
+
+
+function usertext (){
+
+    
+
+
+}

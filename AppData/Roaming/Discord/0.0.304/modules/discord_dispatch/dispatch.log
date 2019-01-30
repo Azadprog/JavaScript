@@ -1,0 +1,25 @@
+[2019-01-18][14:33:17][DEBUG][discord_dispatch::application_manager:190] App started. version="1.9.0"
+[2019-01-18][14:33:17][DEBUG][discord_dispatch::application_manager:969] Searching for applications. install_path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" }
+[2019-01-18][14:33:17][WARN][discord_dispatch::application_manager:973] Failed to read install path. path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" } error=Os { code: 3, kind: NotFound, message: "The system cannot find the path specified." }
+[2019-01-18][14:33:17][DEBUG][discord_dispatch::application_manager:232] Resume requested.
+[2019-01-18][14:42:03][DEBUG][discord_dispatch::application_manager:698] Updating credentials.
+[2019-01-18][15:11:09][DEBUG][discord_dispatch::application_manager:228] Pause requested.
+[2019-01-18][15:40:33][DEBUG][discord_dispatch::application_manager:190] App started. version="1.9.0"
+[2019-01-18][15:40:33][DEBUG][discord_dispatch::application_manager:969] Searching for applications. install_path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" }
+[2019-01-18][15:40:33][WARN][discord_dispatch::application_manager:973] Failed to read install path. path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" } error=Os { code: 3, kind: NotFound, message: "The system cannot find the path specified." }
+[2019-01-23][13:15:35][DEBUG][discord_dispatch::application_manager:190] App started. version="1.9.0"
+[2019-01-23][13:15:35][DEBUG][discord_dispatch::application_manager:969] Searching for applications. install_path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" }
+[2019-01-23][13:15:35][WARN][discord_dispatch::application_manager:973] Failed to read install path. path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" } error=Os { code: 3, kind: NotFound, message: "Systemet finner ikke angitt bane." }
+[2019-01-24][17:39:59][DEBUG][discord_dispatch::application_manager:190] App started. version="1.9.0"
+[2019-01-24][17:39:59][DEBUG][discord_dispatch::application_manager:969] Searching for applications. install_path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" }
+[2019-01-24][17:39:59][WARN][discord_dispatch::application_manager:973] Failed to read install path. path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" } error=Os { code: 3, kind: NotFound, message: "Systemet finner ikke angitt bane." }
+[2019-01-28][15:20:50][DEBUG][discord_dispatch::application_manager:190] App started. version="1.9.0"
+[2019-01-28][15:20:50][DEBUG][discord_dispatch::application_manager:969] Searching for applications. install_path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" }
+[2019-01-28][15:20:50][WARN][discord_dispatch::application_manager:973] Failed to read install path. path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" } error=Os { code: 3, kind: NotFound, message: "Systemet finner ikke angitt bane." }
+[2019-01-28][15:39:07][DEBUG][discord_dispatch::application_manager:698] Updating credentials.
+[2019-01-28][16:04:40][DEBUG][discord_dispatch::application_manager:698] Updating credentials.
+[2019-01-28][18:14:25][DEBUG][discord_dispatch::application_manager:698] Updating credentials.
+[2019-01-28][20:45:56][DEBUG][discord_dispatch::application_manager:190] App started. version="1.9.0"
+[2019-01-28][20:45:56][DEBUG][discord_dispatch::application_manager:969] Searching for applications. install_path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" }
+[2019-01-28][20:45:56][WARN][discord_dispatch::application_manager:973] Failed to read install path. path=AbsolutePath { path_buf: "C:\\Users\\AzadKillaz94\\AppData\\Local\\DiscordGames" } error=Os { code: 3, kind: NotFound, message: "The system cannot find the path specified." }
+[2019-01-28][23:56:30][DEBUG][discord_dispatch::application_manager:698] Updating credentials.

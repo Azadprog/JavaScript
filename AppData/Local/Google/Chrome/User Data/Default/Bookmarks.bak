@@ -1,0 +1,351 @@
+{
+   "checksum": "e5418da6227c29964e7bdfe2769c548f",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13192296295589220",
+            "id": "5",
+            "meta_info": {
+               "last_visited_desktop": "13192550365976715"
+            },
+            "name": "ATV, drone, elbil, elsykkel, rc helikopter, ATV, robot, elatv",
+            "type": "url",
+            "url": "http://arngren.net/"
+         }, {
+            "date_added": "13192340226752713",
+            "id": "7",
+            "name": "iPlayboy.com - Read Playboy Magazine December 1973",
+            "type": "url",
+            "url": "https://www.iplayboy.com/"
+         }, {
+            "date_added": "13192491970790453",
+            "id": "9",
+            "meta_info": {
+               "last_visited_desktop": "13192491972030713"
+            },
+            "name": "Washington, D.C. - Google Maps",
+            "type": "url",
+            "url": "https://www.google.com/maps/place/Washington,+D.C.,+District+of+Columbia,+USA/@38.8908852,-77.0283552,15z/data=!4m5!3m4!1s0x89b7c6de5af6e45b:0xc2524522d4885d2a!8m2!3d38.9071923!4d-77.0368707"
+         }, {
+            "date_added": "13192501540059993",
+            "id": "10",
+            "meta_info": {
+               "last_visited_desktop": "13192501540143040"
+            },
+            "name": "Skaff deg Typing Speed Test – Microsoft Store nb-NO",
+            "type": "url",
+            "url": "https://www.microsoft.com/nb-no/p/typing-speed-test/9wzdncrdqhw4?activetab=pivot%3Aoverviewtab"
+         }, {
+            "date_added": "13192547996518675",
+            "id": "12",
+            "meta_info": {
+               "last_visited_desktop": "13192547996520297"
+            },
+            "name": "TypeRacer - Test your typing speed and learn to type faster. Free typing game and competition. Way more fun than a typing tutor!",
+            "type": "url",
+            "url": "https://play.typeracer.com/"
+         }, {
+            "date_added": "13192548694766856",
+            "id": "13",
+            "meta_info": {
+               "last_visited_desktop": "13193242197996712"
+            },
+            "name": "Typing Test Norwegian - 10FastFingers.com",
+            "type": "url",
+            "url": "https://10fastfingers.com/typing-test/norwegian"
+         }, {
+            "date_added": "13192548764798444",
+            "id": "14",
+            "meta_info": {
+               "last_visited_desktop": "13192548764799725"
+            },
+            "name": "Typing Certification Test — Ratatype",
+            "type": "url",
+            "url": "https://www.ratatype.com/typing-test/test/en/"
+         }, {
+            "date_added": "13192549055575646",
+            "id": "15",
+            "meta_info": {
+               "last_visited_desktop": "13192990030087155"
+            },
+            "name": "Free timed typing tests to test and practice your touch typing",
+            "type": "url",
+            "url": "https://powertyping.com/typing_test/typing_test.html"
+         }, {
+            "date_added": "13192549267688118",
+            "id": "16",
+            "meta_info": {
+               "last_visited_desktop": "13193023430702593"
+            },
+            "name": "zeitgeist - Google-søk",
+            "type": "url",
+            "url": "https://www.google.com/search?q=zeitgeist&oq=zeit&aqs=chrome.1.69i57j0l5.12691j0j7&sourceid=chrome&ie=UTF-8"
+         }, {
+            "date_added": "13192550437206617",
+            "id": "18",
+            "meta_info": {
+               "last_visited_desktop": "13193268715620295"
+            },
+            "name": "Typing practice",
+            "type": "url",
+            "url": "https://www.keybr.com/"
+         }, {
+            "date_added": "13192550648775141",
+            "id": "19",
+            "meta_info": {
+               "last_visited_desktop": "13192550648775279"
+            },
+            "name": "Drunken Monkey - Wikipedia",
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Drunken_Monkey"
+         }, {
+            "date_added": "13192550662055643",
+            "id": "20",
+            "meta_info": {
+               "last_visited_desktop": "13192715417731398"
+            },
+            "name": "all seeing eye - Google-søk",
+            "type": "url",
+            "url": "https://www.google.com/search?q=all+seeing+eye&oq=all+se&aqs=chrome.1.69i57j0l5.4084j0j9&sourceid=chrome&ie=UTF-8"
+         }, {
+            "date_added": "13192550835912140",
+            "id": "21",
+            "meta_info": {
+               "last_visited_desktop": "13192550835912294"
+            },
+            "name": "Gamification Course – subscription complete - Yu-kai Chou: Gamification & Behavioral Design",
+            "type": "url",
+            "url": "https://yukaichou.com/gamification-course-subscription-complete/"
+         }, {
+            "date_added": "13192551150576305",
+            "id": "22",
+            "meta_info": {
+               "last_visited_desktop": "13192551150576480"
+            },
+            "name": "Typing Test · Check your Speed and Practice, WPM",
+            "type": "url",
+            "url": "https://www.keyhero.com/free-typing-test/"
+         }, {
+            "date_added": "13192551473280427",
+            "id": "23",
+            "meta_info": {
+               "last_visited_desktop": "13192551473280554"
+            },
+            "name": "Java Tutorial",
+            "type": "url",
+            "url": "https://www.tutorialspoint.com/java/"
+         }, {
+            "date_added": "13192555644005528",
+            "id": "24",
+            "meta_info": {
+               "last_visited_desktop": "13192555644005756"
+            },
+            "name": "TypingTest.com - Complete a Typing Test in 60 Seconds!",
+            "type": "url",
+            "url": "https://www.typingtest.com/"
+         }, {
+            "date_added": "13192672906992950",
+            "id": "26",
+            "meta_info": {
+               "last_visited_desktop": "13192673110294074"
+            },
+            "name": "Typing speed test",
+            "type": "url",
+            "url": "https://www.goodtyping.com/test.php"
+         }, {
+            "date_added": "13192673210445453",
+            "id": "27",
+            "meta_info": {
+               "last_visited_desktop": "13192673210445582"
+            },
+            "name": "Nitro Type Race",
+            "type": "url",
+            "url": "https://www.nitrotype.com/race"
+         }, {
+            "date_added": "13192719282786770",
+            "id": "29",
+            "meta_info": {
+               "last_visited_desktop": "13192719282786886"
+            },
+            "name": "zeitgeist - Google-søk",
+            "type": "url",
+            "url": "https://www.google.com/search?q=zeitgeist&oq=z&aqs=chrome.0.69i59j0l2j69i57j35i39j0.4615j0j7&sourceid=chrome&ie=UTF-8"
+         }, {
+            "date_added": "13192727693624624",
+            "id": "31",
+            "meta_info": {
+               "last_visited_desktop": "13192727693624739"
+            },
+            "name": "Gravity Light Review - YouTube",
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=L-c2lCoOQc0"
+         }, {
+            "date_added": "13192739384540527",
+            "id": "32",
+            "meta_info": {
+               "last_visited_desktop": "13192739384540666"
+            },
+            "name": "Donald Trump jobber mindre enn deg og meg; har ikke vært på kontoret før 10.45 én eneste gang i 2019 | ABC Nyheter",
+            "type": "url",
+            "url": "https://www.abcnyheter.no/nyheter/verden/2019/01/22/195494504/donald-trump-jobber-mindre-enn-deg-og-meg-har-ikke-vaert-pa-kontoret-for-10-45-en-eneste-gang-i-2019"
+         }, {
+            "date_added": "13192741330926966",
+            "id": "33",
+            "meta_info": {
+               "last_visited_desktop": "13192741679176299"
+            },
+            "name": "Israelske styrker drepte over 50 palestinske barn i fjor - Aftenposten",
+            "type": "url",
+            "url": "https://www.aftenposten.no/verden/i/9majrl/Israelske-styrker-drepte-over-50-palestinske-barn-i-fjor"
+         }, {
+            "date_added": "13192990018533620",
+            "id": "35",
+            "meta_info": {
+               "last_visited_desktop": "13192990018534202"
+            },
+            "name": "European Green Capital",
+            "type": "url",
+            "url": "http://ec.europa.eu/environment/europeangreencapital/winning-cities/2019-oslo/oslo-2019-application/"
+         }, {
+            "date_added": "13192992000991823",
+            "id": "36",
+            "meta_info": {
+               "last_visited_desktop": "13192992000992023"
+            },
+            "name": "function expression. - Google-søk",
+            "type": "url",
+            "url": "https://www.google.com/search?q=function+expression.&newwindow=1&source=lnms&sa=X&ved=0ahUKEwjc6ans9IbgAhUDiSwKHRnkBloQ_AUICSgA&biw=1097&bih=554&dpr=1.75"
+         }, {
+            "date_added": "13193012656815350",
+            "id": "37",
+            "meta_info": {
+               "last_visited_desktop": "13193023387529331"
+            },
+            "name": "Shock: The First Crusade and the Conquest of Jerusalem | The Crusades: An Arab Perspective Ep1 - YouTube",
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=HProiNnmGwI"
+         }, {
+            "date_added": "13193025745707081",
+            "id": "39",
+            "meta_info": {
+               "last_visited_desktop": "13193025745707258"
+            },
+            "name": "String.prototype.indexOf() | MDN",
+            "type": "url",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf"
+         }, {
+            "date_added": "13193156642186433",
+            "id": "41",
+            "meta_info": {
+               "last_visited_desktop": "13193156642186649"
+            },
+            "name": "Jakten på klimaendringene – Spesial",
+            "type": "url",
+            "url": "https://www.nrk.no/jakten-pa-klimaendringene-1.14375177"
+         }, {
+            "date_added": "13193169466297159",
+            "id": "42",
+            "meta_info": {
+               "last_visited_desktop": "13193242219098622"
+            },
+            "name": "Canvas - Høyskolen Kristiania",
+            "type": "url",
+            "url": "https://kristiania.no/it/canvas/"
+         }, {
+            "date_added": "13193169476481209",
+            "id": "43",
+            "meta_info": {
+               "last_visited_desktop": "13193242224481494"
+            },
+            "name": "Dashbord",
+            "type": "url",
+            "url": "https://kristiania.instructure.com/"
+         }, {
+            "date_added": "13193178332081719",
+            "id": "45",
+            "meta_info": {
+               "last_visited_desktop": "13193178332082033"
+            },
+            "name": "Working with objects | MDN",
+            "type": "url",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects"
+         }, {
+            "date_added": "13193191069875921",
+            "id": "46",
+            "meta_info": {
+               "last_visited_desktop": "13193191069876072"
+            },
+            "name": "(86) 9 flips anyone can achieve (Flip progressions) - YouTube",
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=znEsbP0Z0hA"
+         }, {
+            "date_added": "13193191600161058",
+            "id": "47",
+            "meta_info": {
+               "last_visited_desktop": "13193237449350403"
+            },
+            "name": "(86) 16 exercises that will help you achieve your handstand. - YouTube",
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=C6mnR1T05rk"
+         }, {
+            "date_added": "13193241363733889",
+            "id": "49",
+            "meta_info": {
+               "last_visited_desktop": "13193241363734094"
+            },
+            "name": "Huawei – fare for spionasje eller svertekampanje? – NRK Urix – Utenriksnyheter og -dokumentarer",
+            "type": "url",
+            "url": "https://www.nrk.no/urix/huawei-_-fare-for-spionasje-eller-svertekampanje_-1.14399304"
+         }, {
+            "date_added": "13193241429780326",
+            "id": "50",
+            "meta_info": {
+               "last_visited_desktop": "13193241429780491"
+            },
+            "name": "Slik får du jobb i spillbransjen - Kode24",
+            "type": "url",
+            "url": "https://www.kode24.no/kodenytt/slik-far-du-jobb-i-spillbransjen/70416595"
+         }, {
+            "date_added": "13193241433388875",
+            "id": "51",
+            "meta_info": {
+               "last_visited_desktop": "13193241433389039"
+            },
+            "name": "Overview | 3ds Max | Autodesk Knowledge Network",
+            "type": "url",
+            "url": "https://knowledge.autodesk.com/support/3ds-max"
+         }, {
+            "date_added": "13193278941262837",
+            "id": "52",
+            "meta_info": {
+               "last_visited_desktop": "13193278941263062"
+            },
+            "name": "Where Does Iron Come From or How Is It Made? | Sciencing",
+            "type": "url",
+            "url": "https://sciencing.com/does-iron-come-how-made-4928267.html"
+         } ],
+         "date_added": "13192295010359338",
+         "date_modified": "13193278941262837",
+         "id": "1",
+         "name": "Bookmarks bar",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13192295010359371",
+         "date_modified": "0",
+         "id": "2",
+         "name": "Other bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13192295010359379",
+         "date_modified": "0",
+         "id": "3",
+         "name": "Mobile bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

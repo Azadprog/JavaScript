@@ -1,0 +1,126 @@
+[0113/234314.391:INFO:scoped_logging.cc(58)] Starting logs for version: 36.184.200
+[0113/234315.655:INFO:crashpad_crash_reporter.cc(90)] Crash handler launched and ready.
+[0113/234315.655:INFO:chrome_reporter_main.cc(186)] --session-id=UlQONfX25vBRgarD6E/v/LATZOqB8/E4UAEpSD+L --registry-suffix=URZA --enable-crash-reporting --srt-field-trial-group-name=NewCleanerUIExperiment
+[0113/234315.655:WARNING:chrome_util.cc(41)] Can't get Chrome version information from flag: The chrome-version switch was not set.
+[0113/234315.658:INFO:crashpad_crash_client.cc(251)] Found 0 completed crash reports
+[0113/234315.659:INFO:crashpad_crash_client.cc(270)] Found 0 pending crash reports
+[0113/234315.661:INFO:chrome_reporter_main.cc(199)] Crash reporting initialized.
+[0113/234315.989:INFO:chrome_reporter_main.cc(81)] Exiting with code: 2
+[0113/234316.077:INFO:scoped_logging.cc(58)] Starting logs for version: 36.184.200
+[0113/234316.258:INFO:crashpad_crash_reporter.cc(90)] Crash handler launched and ready.
+[0113/234316.258:INFO:chrome_reporter_main.cc(186)] --engine=2 --session-id=UlQONfX25vBRgarD6E/v/LATZOqB8/E4UAEpSD+L --registry-suffix=ESET --enable-crash-reporting --srt-field-trial-group-name=NewCleanerUIExperiment
+[0113/234316.258:WARNING:chrome_util.cc(41)] Can't get Chrome version information from flag: The chrome-version switch was not set.
+[0113/234316.264:INFO:crashpad_crash_client.cc(251)] Found 0 completed crash reports
+[0113/234316.265:INFO:crashpad_crash_client.cc(270)] Found 0 pending crash reports
+[0113/234316.266:INFO:chrome_reporter_main.cc(199)] Crash reporting initialized.
+[0113/234316.293:INFO:sandbox.cc(267)] Starting sandbox process with command line arguments: --enable-crash-reporting --use-crash-handler-with-id="\\.\pipe\crashpad_3692_AMEGQWLJKWVTQAGG" --sandboxed-process-id=2 --init-done-notifier=748 --sandbox-mojo-pipe-token=11525245403457922447 --mojo-platform-channel-handle=684 --engine=2
+[0113/234322.507:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234322.511:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.876:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.884:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.889:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.889:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.891:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.892:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.892:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.892:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.892:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.896:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.898:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.899:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.900:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.900:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.900:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.900:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.900:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.905:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.905:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.907:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.908:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.909:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.909:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234629.909:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0113/234633.325:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/234633.347:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/234633.366:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/234633.367:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/234633.369:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/234633.369:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/234637.997:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/234638.006:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/234638.271:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/234638.281:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/234638.288:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/234638.289:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0113/235557.535:INFO:logging_conversion.cc(36)] Engine Scan exited with status code 0x0
+[0113/235557.541:INFO:chrome_reporter_main.cc(81)] Exiting with code: 2
+[0121/133659.660:INFO:scoped_logging.cc(58)] Starting logs for version: 37.186.201
+[0121/133659.821:INFO:crashpad_crash_reporter.cc(90)] Crash handler launched and ready.
+[0121/133659.821:INFO:chrome_reporter_main.cc(187)] --session-id=dSzDUkny1sXVMApqGAj+FZ+ZSDzG+bEUkSqYr6ZV --registry-suffix=URZA --enable-crash-reporting --srt-field-trial-group-name=NewCleanerUIExperiment
+[0121/133659.821:WARNING:chrome_util.cc(41)] Can't get Chrome version information from flag: The chrome-version switch was not set.
+[0121/133659.822:INFO:crashpad_crash_client.cc(251)] Found 0 completed crash reports
+[0121/133659.822:INFO:crashpad_crash_client.cc(270)] Found 0 pending crash reports
+[0121/133659.823:INFO:chrome_reporter_main.cc(200)] Crash reporting initialized.
+[0121/133700.103:INFO:chrome_reporter_main.cc(82)] Exiting with code: 2
+[0121/133700.183:INFO:scoped_logging.cc(58)] Starting logs for version: 37.186.201
+[0121/133700.409:INFO:crashpad_crash_reporter.cc(90)] Crash handler launched and ready.
+[0121/133700.409:INFO:chrome_reporter_main.cc(187)] --engine=2 --session-id=dSzDUkny1sXVMApqGAj+FZ+ZSDzG+bEUkSqYr6ZV --registry-suffix=ESET --enable-crash-reporting --srt-field-trial-group-name=NewCleanerUIExperiment
+[0121/133700.409:WARNING:chrome_util.cc(41)] Can't get Chrome version information from flag: The chrome-version switch was not set.
+[0121/133700.413:INFO:crashpad_crash_client.cc(251)] Found 0 completed crash reports
+[0121/133700.413:INFO:crashpad_crash_client.cc(270)] Found 0 pending crash reports
+[0121/133700.416:INFO:chrome_reporter_main.cc(200)] Crash reporting initialized.
+[0121/133700.443:INFO:sandbox.cc(267)] Starting sandbox process with command line arguments: --enable-crash-reporting --use-crash-handler-with-id="\\.\pipe\crashpad_10756_KKOQMRMRTHENOAAQ" --sandboxed-process-id=2 --init-done-notifier=760 --sandbox-mojo-pipe-token=14878968951672484434 --mojo-platform-channel-handle=704 --engine=2
+[0121/133702.676:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133702.678:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133747.597:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133747.598:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133753.699:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133753.699:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133753.986:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133753.986:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133754.201:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133754.202:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133759.275:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133759.277:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133759.422:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133759.422:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0121/133801.116:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0121/133801.124:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0121/133801.126:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0121/133801.127:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0121/133805.498:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0121/133805.506:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0121/133805.593:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0121/133805.594:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0121/133805.595:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0121/133805.596:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0121/133809.920:ERROR:scanner_sandbox_interface.cc(517)] Failed to open CSIDL_WINDOWS\tasks\hpceescheduleforazadkillaz94.job: Access is denied. (0x5)
+[0121/134234.641:INFO:logging_conversion.cc(36)] Engine Scan exited with status code 0x0
+[0121/134234.642:INFO:chrome_reporter_main.cc(82)] Exiting with code: 2
+[0128/204436.692:INFO:scoped_logging.cc(58)] Starting logs for version: 37.187.200
+[0128/204436.920:INFO:crashpad_crash_reporter.cc(90)] Crash handler launched and ready.
+[0128/204436.920:INFO:chrome_reporter_main.cc(187)] --engine=2 --session-id=qt/It4E8oZ89InD5xAKSkBBZVIeuIAVhHPZ5HHHu --registry-suffix=ESET --enable-crash-reporting --srt-field-trial-group-name=NewCleanerUIExperiment
+[0128/204436.920:WARNING:chrome_util.cc(41)] Can't get Chrome version information from flag: The chrome-version switch was not set.
+[0128/204436.920:INFO:crashpad_crash_client.cc(251)] Found 0 completed crash reports
+[0128/204436.920:INFO:crashpad_crash_client.cc(270)] Found 0 pending crash reports
+[0128/204436.920:INFO:chrome_reporter_main.cc(200)] Crash reporting initialized.
+[0128/204436.932:INFO:sandbox.cc(267)] Starting sandbox process with command line arguments: --enable-crash-reporting --use-crash-handler-with-id="\\.\pipe\crashpad_11572_ULMDDHWXNXKAOLDS" --sandboxed-process-id=2 --init-done-notifier=740 --sandbox-mojo-pipe-token=11238742300295546599 --mojo-platform-channel-handle=684 --engine=2
+[0128/204437.640:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0128/204437.640:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0128/204457.702:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0128/204457.702:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0128/204457.718:ERROR:scanner_sandbox_interface.cc(148)] Failed to open process: The parameter is incorrect. (0x57)
+[0128/204457.718:ERROR:scanner_sandbox_interface.cc(427)] Failed to open process: The parameter is incorrect. (0x57)
+[0128/204511.737:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0128/204511.737:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0128/204511.737:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0128/204511.737:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0128/204513.592:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0128/204513.592:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0128/204513.688:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0128/204513.688:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0128/204513.704:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0128/204513.704:ERROR:scanner_sandbox_interface.cc(554)] Failed to open registry key: 0x5
+[0128/204516.948:ERROR:scanner_sandbox_interface.cc(517)] Failed to open CSIDL_WINDOWS\tasks\hpceescheduleforazadkillaz94.job: Access is denied. (0x5)
+[0128/204924.193:INFO:logging_conversion.cc(36)] Engine Scan exited with status code 0x0
+[0128/204924.198:INFO:chrome_reporter_main.cc(82)] Exiting with code: 2

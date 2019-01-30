@@ -1,0 +1,13 @@
+[2019-01-25 15:42:19.958] [main] [info] update#setState idle
+[2019-01-25 15:42:49.958] [main] [info] update#setState checking for updates
+[2019-01-25 15:42:49.961] [main] [error] Error: net::ERR_NAME_NOT_RESOLVED
+[2019-01-25 15:42:49.961] [main] [info] update#setState idle
+[2019-01-25 16:42:49.959] [main] [info] update#setState checking for updates
+[2019-01-25 16:42:50.382] [main] [info] update#setState idle
+[2019-01-25 17:42:49.959] [main] [info] update#setState checking for updates
+[2019-01-25 17:42:50.220] [main] [info] update#setState idle
+[2019-01-26 16:13:27.376] [main] [info] update#setState checking for updates
+[2019-01-26 16:13:32.810] [main] [error] Error: net::ERR_NETWORK_CHANGED
+[2019-01-26 16:13:32.810] [main] [info] update#setState idle
+[2019-01-26 17:13:27.388] [main] [info] update#setState checking for updates
+[2019-01-26 17:13:28.042] [main] [info] update#setState idle
