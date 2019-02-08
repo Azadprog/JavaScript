@@ -1,0 +1,46 @@
+   
+My ideea :
+
+ 
+
+Creating a program  who calculate the generation 
+
+
+
+ 
+
+ 
+
+
+must have : 
+
+
+	
+* User must input the Number to get output   ( Prompt() ) 
+
+	
+* Program takes only Interger  nubers not float, string , booleans , or other kinds of  datatypes 
+
+
+	
+*  fourmula or equation to use is 2 ^ x  // This show .......
+
+
+	
+* User get a output from prgram that tells him  how many ancestor you have and how many genration back it is   example : "About  X generation back you have Y ancestor "  
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------
+psuedo Codes :
+
+declaring a variable and defing it to userInput(Prompt())
+
+<
